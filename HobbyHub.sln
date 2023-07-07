@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33627.172
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HobbyHub", "HobbyHub\HobbyHub.csproj", "{24C1BD49-58C1-4C13-ABB4-9522CACAA6E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HobbyHubSystem.Common", "HobbyHubSystem.Common\HobbyHubSystem.Common.csproj", "{0DE8F9CC-B3E7-4908-9E22-10676CBBB8B1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{CC6B477F-CE74-4D4B-B9FA-B73583600FEB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{5A716268-9772-4A7A-80EF-56A721C679E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HobbyBubSystem.Data.Models", "HobbyBubSystem.Data.Models\HobbyBubSystem.Data.Models.csproj", "{872AD2C4-418E-4D13-9B97-F30728F4EB10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HobbyHubSystem.Data", "HobbyHubSystem.Data\HobbyHubSystem.Data.csproj", "{E0DF56A1-C60C-4519-8488-2CAA8D1F4968}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HobbyHubSystem.Web.ViewModels", "HobbyHubSystem.Web.ViewModels\HobbyHubSystem.Web.ViewModels.csproj", "{D9F33F41-9299-4531-A871-80568C0506F2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{24C1BD49-58C1-4C13-ABB4-9522CACAA6E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24C1BD49-58C1-4C13-ABB4-9522CACAA6E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24C1BD49-58C1-4C13-ABB4-9522CACAA6E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24C1BD49-58C1-4C13-ABB4-9522CACAA6E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DE8F9CC-B3E7-4908-9E22-10676CBBB8B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DE8F9CC-B3E7-4908-9E22-10676CBBB8B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DE8F9CC-B3E7-4908-9E22-10676CBBB8B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DE8F9CC-B3E7-4908-9E22-10676CBBB8B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{872AD2C4-418E-4D13-9B97-F30728F4EB10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{872AD2C4-418E-4D13-9B97-F30728F4EB10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{872AD2C4-418E-4D13-9B97-F30728F4EB10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{872AD2C4-418E-4D13-9B97-F30728F4EB10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0DF56A1-C60C-4519-8488-2CAA8D1F4968}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0DF56A1-C60C-4519-8488-2CAA8D1F4968}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0DF56A1-C60C-4519-8488-2CAA8D1F4968}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0DF56A1-C60C-4519-8488-2CAA8D1F4968}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9F33F41-9299-4531-A871-80568C0506F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9F33F41-9299-4531-A871-80568C0506F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9F33F41-9299-4531-A871-80568C0506F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9F33F41-9299-4531-A871-80568C0506F2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{24C1BD49-58C1-4C13-ABB4-9522CACAA6E9} = {CC6B477F-CE74-4D4B-B9FA-B73583600FEB}
+		{872AD2C4-418E-4D13-9B97-F30728F4EB10} = {5A716268-9772-4A7A-80EF-56A721C679E2}
+		{E0DF56A1-C60C-4519-8488-2CAA8D1F4968} = {5A716268-9772-4A7A-80EF-56A721C679E2}
+		{D9F33F41-9299-4531-A871-80568C0506F2} = {CC6B477F-CE74-4D4B-B9FA-B73583600FEB}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4DF81865-CAE6-406B-86BE-BC0266272C71}
+	EndGlobalSection
+EndGlobal
