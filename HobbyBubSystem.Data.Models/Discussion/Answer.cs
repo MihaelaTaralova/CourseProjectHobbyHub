@@ -8,11 +8,16 @@ namespace HobbyBubSystem.Data.Models
 {
     public class Answer
     {
+        public Answer()
+        {
+            this.AuthorId = Guid.NewGuid();
+        }
+
         [Key]
         public int Id { get; set; }
 
         [ForeignKey(nameof(Author))]
-        public string AuthorId { get; set; } = null!;
+        public Guid AuthorId { get; set; }
 
         public HobbyUser Author { get; set; } = null!;
 
@@ -23,8 +28,7 @@ namespace HobbyBubSystem.Data.Models
         [ForeignKey(nameof(Question))] 
         public string QuestionId { get; set; } = null!;
 
-        public Question Question { get; set; } = null!;
-        
+        public Question Question { get; set; } = null!;        
 
         public DateTime RepliedOn { get; set; }
 

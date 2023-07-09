@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HobbyBubSystem.Data.Models\HobbyBubSystem.Data.Models.csproj" />
     <ProjectReference Include="..\HobbyHubSystem.Common\HobbyHubSystem.Common.csproj" />
     <ProjectReference Include="..\HobbyHubSystem.Data\HobbyHubSystem.Data.csproj" />
     <ProjectReference Include="..\HobbyHubSystem.Web.ViewModels\HobbyHubSystem.Web.ViewModels.csproj" />
