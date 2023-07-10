@@ -1,4 +1,5 @@
-﻿using HobbyHubSystem.Web.ViewModels.Home;
+﻿using HobbyHub.Web.Services.Interfaces;
+using HobbyHubSystem.Web.ViewModels.Home;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,9 +7,10 @@ namespace HobbyHub.Controllers
 {
     public class HomeController : Controller
     {
+        
         public HomeController()
         {
-            
+           
         }
 
         public IActionResult Index()
