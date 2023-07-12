@@ -7,18 +7,20 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<HobbyHubDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<HobbyUser>(options =>
 {
-    options.SignIn.RequireConfirmedAccount = true;
-    options.Password.RequireDigit = true;
-    options.Password.RequireNonAlphanumeric = true;
-    options.Password.RequiredLength = 6;
+    options.SignIn.RequireConfirmedAccount = builder.Configuration.GetValue<bool>("Identity: SignIn: RequireConfirmedAccount");
+    options.Password.RequireDigit = builder.Configuration.GetValue<bool>("Identity: Password: RequireDigit");
+    options.Password.RequireUppercase = builder.Configuration.GetValue<bool>("Identity: Password: RequireUppercase");
+    options.Password.RequireLowercase = builder.Configuration.GetValue<bool>("Identity: Password: RequireLowercase");
+    options.Password.RequireNonAlphanumeric = builder.Configuration.GetValue<bool>("Identity: Password: RequireNonAlphanumeric");
+    options.Password.RequiredLength = builder.Configuration.GetValue<int>("Identity: Password: RequiredLength");
 })
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<HobbyHubDbContext>();
 builder.Services.AddControllersWithViews();
 
 WebApplication app = builder.Build();

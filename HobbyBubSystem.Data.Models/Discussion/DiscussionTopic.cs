@@ -37,6 +37,6 @@ namespace HobbyBubSystem.Data.Models.Discussion
         public virtual ICollection<Question> Questions { get; set; }
 
         [Comment("collection with all the answers concerning one question in the topic")]
-        public virtual ICollection<Answer> Answers { get; set; } // това трябва ли да го има
+        public virtual ICollection<Answer> Answers { get; set; } 
     }
 }

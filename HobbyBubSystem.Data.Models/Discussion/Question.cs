@@ -36,7 +36,7 @@ namespace HobbyBubSystem.Data.Models
         [Comment("the discussion to which the question belongs")]
         [Required]
         [ForeignKey(nameof(DiscussionTopic))]
-        public string DiscussionTopicId { get; set; } = null!;
+        public int DiscussionTopicId { get; set; }
 
         public virtual DiscussionTopic DiscussionTopic { get; set; } = null!;
 

@@ -10,9 +10,6 @@ namespace HobbyHubSystem.Common
     {
         public static class HobbyUser
         {
-            public const int UsernameMax = 15;
-            public const int UsernameMin = 5;
-
             public const int FirstNameMax = 25;
             public const int FirstNameMin = 5;
 

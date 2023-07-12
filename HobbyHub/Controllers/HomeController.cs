@@ -1,5 +1,4 @@
-﻿using HobbyHub.Web.Services.Interfaces;
-using HobbyHubSystem.Web.ViewModels.Home;
+﻿using HobbyHubSystem.Web.ViewModels.Home;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

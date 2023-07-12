@@ -9,15 +9,11 @@ namespace HobbyBubSystem.Data.Models.Account
         public HobbyUser()
         {
             this.Id = Guid.NewGuid();
-            this.Hubs = new HashSet<Hub>();
             this.Events = new HashSet<Event>();
             this.Questions = new HashSet<Question>();
             this.Answers = new HashSet<Answer>();
+            this.HobbyUsersHubs = new HashSet<HobbyUserHub>();
         }
-
-        [Required]
-        [MaxLength(UsernameMax)]
-        public string Username { get; set; } = null!;
 
         [Required]
         [MaxLength(FirstNameMax)]
@@ -35,12 +31,13 @@ namespace HobbyBubSystem.Data.Models.Account
         [Required]
         [MaxLength(ImageUrlMaxLength)]
         public string ImageUrl { get; set; } = null!;
-        public virtual ICollection<Hub> Hubs { get; set; }
-
+      
         public virtual ICollection<Event> Events { get; set; }
 
         public virtual ICollection<Question> Questions { get; set; }
 
         public virtual ICollection<Answer> Answers { get; set; }
+
+        public virtual ICollection<HobbyUserHub> HobbyUsersHubs { get; set;}
     }
 }

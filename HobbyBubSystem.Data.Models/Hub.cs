@@ -11,10 +11,10 @@ namespace HobbyBubSystem.Data.Models
     {
         public Hub()
         {
-         this.Articles = new List<Article>();
+            this.Articles = new List<Article>();
             this.Events = new List<Event>();
-            this.Members = new List<HobbyUser>();
             this.DiscussionTopics = new List<DiscussionTopic>();
+            this.Members = new HashSet<HobbyUserHub>();
         }
         [Comment("unique identifier")]
         [Key]
@@ -49,10 +49,10 @@ namespace HobbyBubSystem.Data.Models
         [Comment("events which are bound with the hobby")]
         public virtual ICollection<Event> Events { get; set; }
 
-        [Comment("memebers of the group")]
-        public virtual ICollection<HobbyUser> Members { get; set; }
-
         [Comment("discussion topic in the forum")]
         public virtual ICollection<DiscussionTopic> DiscussionTopics { get; set; }
+
+        [Comment("memebers of the group")]
+        public virtual ICollection<HobbyUserHub> Members { get; set; }
     }
 }

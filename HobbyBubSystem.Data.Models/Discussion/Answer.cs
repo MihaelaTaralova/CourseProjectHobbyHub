@@ -33,7 +33,7 @@ namespace HobbyBubSystem.Data.Models
 
         [Comment("this is the question")]
         [ForeignKey(nameof(Question))] 
-        public string QuestionId { get; set; } = null!;
+        public int QuestionId { get; set; }
 
         public virtual Question Question { get; set; } = null!;
 
@@ -43,7 +43,7 @@ namespace HobbyBubSystem.Data.Models
         [Comment("the topic where the question belongs")]
         [Required]
         [ForeignKey(nameof(DiscussionTopic))]
-        public string DiscussionTopicId { get; set; } = null!;
+        public int DiscussionTopicId { get; set; }
 
         public virtual DiscussionTopic DiscussionTopic { get; set; } = null!;
 

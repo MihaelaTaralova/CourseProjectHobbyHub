@@ -9,16 +9,15 @@ using System.Threading.Tasks;
 
 namespace HobbyHubSystem.Data.EntityConfiguration
 {
-    internal class EventConfiguration : IEntityTypeConfiguration<Event>
+    public class HubConfiguration : IEntityTypeConfiguration<Hub>
     {
-        public void Configure(EntityTypeBuilder<Event> builder)
+        public void Configure(EntityTypeBuilder<Hub> builder)
         {
 
             builder
-                .HasOne(e => e.Creator)
-                .WithMany(c => c.Events)
-                .HasForeignKey(q => q.CreatorId)
-                .OnDelete(DeleteBehavior.Restrict);
+               .HasOne(e => e.Hobby)
+               .WithOne(e => e.Hub)
+               .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
