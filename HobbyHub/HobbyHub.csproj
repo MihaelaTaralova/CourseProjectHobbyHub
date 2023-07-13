@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.15" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.15" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.15" />
@@ -21,6 +22,10 @@
     <ProjectReference Include="..\HobbyHubSystem.Common\HobbyHubSystem.Common.csproj" />
     <ProjectReference Include="..\HobbyHubSystem.Data\HobbyHubSystem.Data.csproj" />
     <ProjectReference Include="..\HobbyHubSystem.Web.ViewModels\HobbyHubSystem.Web.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>

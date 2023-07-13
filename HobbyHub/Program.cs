@@ -1,5 +1,7 @@
 using HobbyBubSystem.Data.Models.Account;
 using HobbyHub.Data;
+using HobbyHub.Web.Services.Interfaces;
+using HobbyHub.Web.Services.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +12,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<HobbyHubDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
 
 builder.Services.AddDefaultIdentity<HobbyUser>(options =>
 {
@@ -22,6 +25,8 @@ builder.Services.AddDefaultIdentity<HobbyUser>(options =>
 })
     .AddEntityFrameworkStores<HobbyHubDbContext>();
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IImageService, ImageService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 
 WebApplication app = builder.Build();
 

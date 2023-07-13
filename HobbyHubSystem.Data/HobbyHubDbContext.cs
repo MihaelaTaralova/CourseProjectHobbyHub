@@ -44,6 +44,7 @@ namespace HobbyHub.Data
             builder.ApplyConfiguration<Hobby>(new HobbyConfiguration());
             builder.ApplyConfiguration<HobbyUserHub>(new HobbyUserHubConfiguration());
             builder.ApplyConfiguration<Question>(new QuestionConfiguration());
+            builder.ApplyConfiguration<HobbyUser>(new HobbyUserConfiguration());
         }
 
     }
