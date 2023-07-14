@@ -26,7 +26,7 @@ namespace HobbyBubSystem.Data.Models.Account
         [Required]
         public string Gender { get; set; } = null!;
 
-        public DateTime RegisteredOn { get; set; }
+        public DateTime RegisteredOn { get; set; } = DateTime.UtcNow;
 
         [Required]
         [MaxLength(ImageUrlMaxLength)]

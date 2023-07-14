@@ -22,6 +22,9 @@ builder.Services.AddDefaultIdentity<HobbyUser>(options =>
     options.Password.RequireLowercase = builder.Configuration.GetValue<bool>("Identity: Password: RequireLowercase");
     options.Password.RequireNonAlphanumeric = builder.Configuration.GetValue<bool>("Identity: Password: RequireNonAlphanumeric");
     options.Password.RequiredLength = builder.Configuration.GetValue<int>("Identity: Password: RequiredLength");
+    options.User.RequireUniqueEmail = builder.Configuration.GetValue<bool>("Identity: User: RequireUniqueEmail");
+    options.User.AllowedUserNameCharacters = builder.Configuration.GetValue<string> ("Identity: User: AllowedUserNameCharacters");
+    
 })
     .AddEntityFrameworkStores<HobbyHubDbContext>();
 builder.Services.AddControllersWithViews();
