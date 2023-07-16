@@ -16,19 +16,19 @@ namespace HobbyHub.Data
         {
         }
 
-        DbSet<Article> Articles { get; set; } = null!;
+        public DbSet<Article> Articles { get; set; } = null!;
 
-        DbSet<Category> Categories { get; set; } = null!;
+        public DbSet<Category> Categories { get; set; } = null!;
 
-        DbSet<Event> Events { get; set; } = null!;
+        public DbSet<Event> Events { get; set; } = null!;
 
-        DbSet<Hobby> Hobbies { get; set; } = null!;
+        public DbSet<Hobby> Hobbies { get; set; } = null!;
 
-        DbSet<Hub> Hubs { get; set; } = null!;
+        public DbSet<Hub> Hubs { get; set; } = null!;
 
-        DbSet<Answer> Answers { get; set; } = null!;
+        public DbSet<Answer> Answers { get; set; } = null!;
 
-        DbSet<Question> Questions { get; set; } = null!;
+        public DbSet<Question> Questions { get; set; } = null!;
 
         DbSet<DiscussionTopic> DiscussionTopics { get; set; } = null!;
 
