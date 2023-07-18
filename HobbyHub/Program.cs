@@ -33,6 +33,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IUserManagementService, UserManagementService>();
+builder.Services.AddScoped<IAllCategoryService, AllCategoryService>();
 
 
 builder.Services.ConfigureApplicationCookie(options =>

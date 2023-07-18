@@ -21,6 +21,9 @@ namespace HobbyBubSystem.Data.Models
         [MaxLength(NameMax)]
         public string Name { get; set; } = null!;
 
+        [Comment("when it is false - the category is deleted")]
+        public bool IsActive { get; set; }
+
         [Comment("picture of the category")]
         [Required]
         [MaxLength(ImageUrlMaxLength)]

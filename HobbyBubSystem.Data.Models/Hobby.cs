@@ -43,6 +43,9 @@ namespace HobbyBubSystem.Data.Models
         [Comment("before release the hobby should be approved by admin or moderator")]
         public bool IsApproved { get; set; }
 
+        [Comment("when it is false - the hobby is deleted")]
+        public bool IsActive { get; set; }
+
         [Comment("picture of the hobby")]
         [Required]
         [MaxLength(ImageUrlMaxLength)]

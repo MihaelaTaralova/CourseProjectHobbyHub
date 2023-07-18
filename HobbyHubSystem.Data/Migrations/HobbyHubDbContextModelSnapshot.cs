@@ -88,7 +88,9 @@ namespace HobbyHubSystem.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("RegisteredOn")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -223,6 +225,10 @@ namespace HobbyHubSystem.Data.Migrations
                         .HasColumnType("nvarchar(2048)")
                         .HasComment("picture of the category");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit")
+                        .HasComment("when it is false - the category is deleted");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -348,6 +354,10 @@ namespace HobbyHubSystem.Data.Migrations
                         .HasMaxLength(2048)
                         .HasColumnType("nvarchar(2048)")
                         .HasComment("picture of the hobby");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit")
+                        .HasComment("when it is false - the hobby is deleted");
 
                     b.Property<bool>("IsApproved")
                         .ValueGeneratedOnAdd()
