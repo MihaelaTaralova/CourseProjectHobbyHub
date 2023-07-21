@@ -1,8 +1,30 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; 
+    }
+
+    .image-container {
+        text-align: center;
+    }
+
+        .image-container img {
+            max-width: 1000px;
+        }
+</style>
+
+<div class="center">
+    <div class="image-container">
+        <h2>Welcome to Hobby Hub</h2>
+        <img src="~/Images/hobbyhub.jpg" alt="Hobby Hub">
+        <p>
+            Hobby Hub is the best place to explore and share your hobbies with others. Whether you are a seasoned hobbyist or just starting, you'll find a community of like-minded individuals here.
+        </p>
+    </div>
 </div>

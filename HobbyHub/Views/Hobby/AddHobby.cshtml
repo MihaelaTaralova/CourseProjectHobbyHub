@@ -1,0 +1,53 @@
+﻿@using HobbyHubSystem.Web.ViewModels.Hobby;
+@model AddHobbyViewModel
+
+@{
+    ViewData["Title"] = "Add Hobby";
+}
+
+<h2>Add Hobby</h2>
+
+<form asp-controller="Hobby" asp-action="AddHobby" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Image</label>
+        <input asp-for="ImageUrl" type="file" class="form-control" />
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div>
+
+    <input type="hidden" asp-for="CategoryId" value="@Model.CategoryId" />
+
+    @*<div class="form-group">
+        <div class="form-check">
+            <input asp-for="IsActive" class="form-check-input" type="checkbox" />
+            <label class="form-check-label" asp-for="IsActive">Active</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="form-check">
+            <input asp-for="IsApproved" class="form-check-input" type="checkbox" />
+            <label class="form-check-label" asp-for="IsApproved">Approved</label>
+        </div>
+    </div>*@
+
+    <button type="submit" class="btn btn-primary">Add Hobby</button>
+</form>
+
+@*<a asp-controller="Category" asp-action="OpenCategory">Back to Category</a>*@
+@*<a href="@Url.Action("OpenCategory", "Category", new { categoryId = Model.CategoryId })">Back to Category</a>*@
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,51 @@
+﻿@using HobbyHubSystem.Web.ViewModels.Category;
+@model AllCategoriesViewModel
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<style>
+    .categories-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Три колони с равна ширина */
+        grid-gap: 20px; /* Разстояние между категориите */
+    }
+
+    .category {
+        text-align: center;
+    }
+
+        .category img {
+            max-width: 200px;
+            max-height: 200px;
+        }
+
+    .add-category-button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 25px; 
+    }
+</style>
+
+<div class="categories-container">
+    @foreach (var category in Model.Categories)
+    {
+        <div class="category">
+            <img src="@category.ImageUrl" alt="@category.Name" />
+            <p>@category.Name</p>
+            <a asp-controller="Category" asp-action="OpenCategory" asp-route-id="@category.CategoryId">Open Category</a>
+        </div>
+    }
+</div>
+
+<div class="add-category-button-container">
+    @if (User.Identity.IsAuthenticated && (User.IsInRole("Administrator") || User.IsInRole("Moderator")))
+    {
+        <a asp-controller="Category" asp-action="AddCategory">Add Category</a>
+    }
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

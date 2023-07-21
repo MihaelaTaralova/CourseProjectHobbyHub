@@ -1,0 +1,19 @@
+﻿@model HobbyHubSystem.Web.ViewModels.Hobby.HobbyViewModel
+
+@{
+    ViewData["Title"] = "Open Hobby";
+}
+
+<h2>@Model.Name</h2>
+
+<div class="hobby-description">
+    <p>@Model.Description</p>
+</div>
+
+<div class="hobby-image">
+    <img src="@Model.ImageUrl" alt="Hobby Image" />
+</div>
+
+<div class="join-hub-button">
+    <a href="@Url.Action("JoinHub", "Hobby", new { hobbyId = Model.HobbyId })" class="btn btn-primary">Join Hub</a>
+</div>

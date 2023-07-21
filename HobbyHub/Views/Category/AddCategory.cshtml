@@ -1,0 +1,28 @@
+﻿@using HobbyHubSystem.Web.ViewModels.Category;
+@model AddCategoryViewModel
+
+@{
+    ViewData["Title"] = "Add Category";
+}
+
+<h1>Add Category</h1>
+
+<form asp-controller="Category" asp-action="AddCategory" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label>Name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Image</label>
+        <input asp-for="ImageUrl" type="file" class="form-control" />
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Category</button>
+</form>
+
+<a asp-controller="Category" asp-action="All">Back to All Categories</a>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

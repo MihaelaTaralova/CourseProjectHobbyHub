@@ -1,0 +1,48 @@
+﻿@using HobbyHubSystem.Web.ViewModels.Category;
+@model DisplayCategoryViewModel
+
+@{
+    ViewData["Title"] = "Category: " + Model.Name;
+}
+
+<h2>@Model.Name</h2>
+
+<div class="hobbies-container">
+    @foreach (var hobby in Model.Hobbies)
+    {
+        <div class="hobby">
+            <img src="@hobby.ImageUrl" alt="@hobby.Name" />
+            <p>@hobby.Name</p>
+        </div>
+    }
+</div>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="add-hobby-button-container">
+        <a asp-controller="Hobby" asp-action="AddHobby" asp-route-id="@Model.CategoryId">Add Hobby</a>
+    </div>
+}
+
+<style>
+    .hobbies-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 20px;
+    }
+
+    .hobby {
+        text-align: center;
+    }
+
+        .hobby img {
+            max-width: 200px;
+            max-height: 200px;
+        }
+
+    .add-hobby-button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 25px;
+    }
+</style>
