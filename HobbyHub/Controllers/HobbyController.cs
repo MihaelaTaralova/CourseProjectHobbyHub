@@ -116,12 +116,38 @@ namespace HobbyHub.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> DeleteHobbyAsync(int hobbyId)
+        [HttpGet]
+        public async Task<IActionResult> DeleteHobby(int Id)
+        {
+            var hobby = await hobbyService.GetHobbyByIdAsync(Id);
+
+            if (hobby == null)
+            {
+                return NotFound();
+            }
+
+            if (hobby.IsActive == false)
+            {
+                return NotFound();
+            }
+
+            var hobbyViewModel = new DeleteHobbyViewModel
+            {
+                Id = hobby.Id,
+                Name = hobby.Name,
+                ImageUrl = hobby.ImageUrl,
+            };
+
+            return View(hobbyViewModel);
+        }
+
+        [HttpPost, ActionName("DeleteHobby")]
+        public async Task<IActionResult> DeleteHobbyConfirmed(int Id)
         {
             try
             {
-                await hobbyService.DeleteHobbyAsync(hobbyId);
-                return RedirectToAction("All");
+                await hobbyService.DeleteHobbyAsync(Id);
+                return RedirectToAction("OpenCategory", "Category");
             }
             catch (Exception)
             {

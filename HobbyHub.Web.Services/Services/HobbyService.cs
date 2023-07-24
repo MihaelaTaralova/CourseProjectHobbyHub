@@ -75,14 +75,7 @@ namespace HobbyHub.Web.Services.Services
            
             hobby.Name = model.Name;
             hobby.Description = model.Description;
-            //hobby.IsApproved = true;
-            //hobby.IsActive = true;
-
-            //if (model.ImageUrl != null)
-            //{
-            //    hobby.ImageUrl = await imageService.SaveImage(model.ImageUrl);
-            //}
-
+           
             dbContext.Hobbies.Update(hobby);
             await dbContext.SaveChangesAsync();
         }

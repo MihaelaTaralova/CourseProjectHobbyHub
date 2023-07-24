@@ -59,7 +59,7 @@ namespace HobbyHub.Web.Services.Services
             {
                 throw new ArgumentException("Category not found.");
             }
-
+            
             category.IsActive = false;
             dbContext.Categories.Update(category);
             await dbContext.SaveChangesAsync();

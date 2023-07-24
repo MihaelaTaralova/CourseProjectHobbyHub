@@ -25,7 +25,9 @@ namespace HobbyHub.Controllers
         public async Task<IActionResult> All()
         {
             var categories = await categoryService.GetAllCategoriesAsync();
-            var categoryViewModels = categories.Select(c => new CategoryViewModel
+            var activeCategories = categories.Where(c => c.IsActive == true).ToList();
+
+            var categoryViewModels = activeCategories.Select(c => new CategoryViewModel
             {
                 CategoryId = c.Id,
                 Name = c.Name,
@@ -51,8 +53,9 @@ namespace HobbyHub.Controllers
             }
 
             var hobbies = await hobbyService.GetHobbiesByCategoryId(id);
+            var activeHobbies = hobbies.Where(h => h.IsActive == true).ToList();
 
-            var hobbiesViewModel = hobbies.Select(h => new HobbiesInCategoryViewModel
+            var hobbiesViewModel = activeHobbies.Select(h => new HobbiesInCategoryViewModel
             {
                 HobbyId = h.Id,
                 Name = h.Name,
