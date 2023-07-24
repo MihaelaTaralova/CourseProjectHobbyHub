@@ -10,12 +10,15 @@ namespace HobbyHub.Controllers
     {
         private readonly ICategoryService categoryService;
         private readonly IHobbyService hobbyService;
+        private readonly IImageService imageService;
 
         public CategoryController(ICategoryService _categoryService,
-            IHobbyService _hobbyService)
+            IHobbyService _hobbyService,
+            IImageService _imageService)
         {
             this.categoryService = _categoryService;
             this.hobbyService = _hobbyService;
+            this.imageService = _imageService;
         }
 
         [HttpGet]
@@ -95,18 +98,24 @@ namespace HobbyHub.Controllers
 
         return View(categoryViewModel);
     }
+
         [HttpGet]
-        public async Task<IActionResult> EditCategoryAsync(int catgoryId)
+        public async Task<IActionResult> EditCategory(int Id)
         {
-            var category = await categoryService.GetCategoryByIdAsync(catgoryId);
+            var category = await categoryService.GetCategoryByIdAsync(Id);
+
             if (category == null)
             {
                 return NotFound();
             }
-
-            var categoryViewModel = new CategoryViewModel
+            if (category.IsActive == false)
             {
-                CategoryId = catgoryId,
+                return NotFound();
+            }
+
+            var categoryViewModel = new EditCategoryViewModel
+            {
+                Id = Id,
                 Name = category.Name,
                 ImageUrl = category.ImageUrl
             };
@@ -115,13 +124,15 @@ namespace HobbyHub.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditCategoryAsync(int catgoryId, AddCategoryViewModel model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditCategory(int Id, EditCategoryViewModel model)
         {
+
             if (ModelState.IsValid)
             {
                 try
-                {
-                    await categoryService.EditCategoryAsync(catgoryId, model);
+                {                   
+                    await categoryService.EditCategory(Id, model);
                     return RedirectToAction("All");
                 }
                 catch (ArgumentException ex)
@@ -133,19 +144,44 @@ namespace HobbyHub.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> DeleteCategoryAsync(int categoryId)
+        [HttpGet]
+        public async Task<IActionResult> Delete(int Id)
+        {
+            var category = await categoryService.GetCategoryByIdAsync(Id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+            if (category.IsActive == false)
+            {
+                return NotFound();
+            }
+            var categoryViewModel = new DeleteCategoryViewModel
+            {
+                Id = Id,
+                Name = category.Name,
+                ImageUrl = category.ImageUrl
+            };
+
+            return View(categoryViewModel);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int Id)
         {
             try
             {
-                await categoryService.DeleteCategoryAsync(categoryId);
+                await categoryService.DeleteCategory(Id);
                 return RedirectToAction("All");
             }
-            catch (Exception)
+            catch (ArgumentException ex)
             {
-                return NotFound();               
+                ModelState.AddModelError("", ex.Message);
             }
-        }
 
+            return RedirectToAction("All", "Category");
+        }
 
     }
 }

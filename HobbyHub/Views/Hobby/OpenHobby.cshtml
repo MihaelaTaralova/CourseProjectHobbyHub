@@ -1,4 +1,5 @@
 ﻿@model HobbyHubSystem.Web.ViewModels.Hobby.HobbyViewModel
+@using HobbyHubSystem.Common;
 
 @{
     ViewData["Title"] = "Open Hobby";
@@ -17,3 +18,13 @@
 <div class="join-hub-button">
     <a href="@Url.Action("JoinHub", "Hobby", new { hobbyId = Model.HobbyId })" class="btn btn-primary">Join Hub</a>
 </div>
+
+@if (User.IsInRole(RoleConstants.Administrator) || User.IsInRole(RoleConstants.Moderator))
+{
+    <div class="add-hobby-button-container">
+        <a asp-controller="Hobby" asp-action="EditHobby" asp-route-id="@Model.HobbyId">Edit Hobby</a>
+    </div>
+    <div class="add-hobby-button-container">
+        <a asp-controller="Hobby" asp-action="Delete" asp-route-id="@Model.HobbyId">Delete Hobby</a>
+    </div>
+}

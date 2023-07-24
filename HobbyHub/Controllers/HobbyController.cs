@@ -1,10 +1,7 @@
 ﻿using HobbyHub.Data;
 using HobbyHub.Web.Services.Interfaces;
-using HobbyHub.Web.Services.Services;
-using HobbyHubSystem.Web.ViewModels.Category;
 using HobbyHubSystem.Web.ViewModels.Hobby;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
 
 namespace HobbyHub.Controllers
@@ -56,57 +53,9 @@ namespace HobbyHub.Controllers
             return View(model);
         }
 
+        [HttpPost]
         public async Task<IActionResult> AddHobby(AddHobbyViewModel hobbyViewModel)
         {
-            //    if (hobbyViewModel.ImageUrl == null || hobbyViewModel.ImageUrl.Length == 0)
-            //    {
-            //        ModelState.AddModelError("ImageUrl", "Please select a valid image file.");
-            //    }
-            //    else if (!imageService.IsValidImage(hobbyViewModel.ImageUrl))
-            //    {
-            //        ModelState.AddModelError("ImageUrl", "Invalid image format. Only JPG, JPEG, PNG, and GIF are supported.");
-            //    }
-
-            //    if (User.IsInRole("Administrator") || User.IsInRole("Moderator"))
-            //    {
-            //        hobbyViewModel.IsApproved = true;
-            //    }
-            //    else
-            //    {
-            //        hobbyViewModel.IsApproved = false;
-            //    }
-
-            //    hobbyViewModel.CreatorId = new Guid(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-
-            //    if (ModelState.IsValid)
-            //    {
-            //        // save the image and get the url
-            //        var imageurl = await imageService.SaveImage(hobbyViewModel.ImageUrl);
-
-            //        // set the imageurl property of the viewmodel to the saved url
-            //        hobbyViewModel.SavedImageUrl = imageurl;
-
-            //        // Get the category from the database using the category name
-            //        var category = await categoryService.GetCategoryByNameAsync(hobbyViewModel.Name);
-
-            //        if (category != null)
-            //        {
-            //            // Set the CategoryId property of the ViewModel to the category id
-            //            hobbyViewModel.CategoryId = category.Id;
-
-            //            // Now you can add the hobby to the database
-            //            await hobbyService.AddHobbyAsync(hobbyViewModel);
-            //            return RedirectToAction("All");
-            //        }
-            //        else
-            //        {
-            //            // Handle the case when the category does not exist
-            //            ModelState.AddModelError("", "The specified category does not exist.");
-            //        }
-            //    }
-
-            //    return View(hobbyViewModel);
-
             if (!(User.IsInRole("Administrator") || User.IsInRole("Moderator")))
             {
                 return Forbid();
@@ -122,36 +71,41 @@ namespace HobbyHub.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditHobbyAsync(int hobbyId)
+        public async Task<IActionResult> EditHobby(int Id)
         {
-            var hobby = await dbContext.Hobbies.FindAsync(hobbyId);
+            var hobby = await hobbyService.GetHobbyByIdAsync(Id);
+
             if (hobby == null)
             {
                 return NotFound();
             }
 
-            var hobbyViewModel = new HobbyViewModel
+            if (hobby.IsActive == false)
             {
-                HobbyId = hobbyId,
+                return NotFound();
+            }
+
+            var hobbyViewModel = new EditHobbyViewModel
+            {
+                Id = Id,
                 Name = hobby.Name,
                 Description = hobby.Description,
-                ImageUrl = hobby.ImageUrl,
-                CategoryId = hobby.CategoryId,
-                HubId = hobby.HubId
-            };
+                ImageUrl = hobby.ImageUrl
+        };
 
             return View(hobbyViewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditHobbyAsync(int hobbyId, AddHobbyViewModel model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditHobby(int Id, EditHobbyViewModel model)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    await hobbyService.EditHobbyAsync(hobbyId, model);
-                    return RedirectToAction("All");
+                    await hobbyService.EditHobbyAsync(Id, model);
+                    return RedirectToAction("OpenHobby", "Hobby", new { id = model.Id, name = model.Name }, fragment: null);
                 }
                 catch (ArgumentException ex)
                 {
@@ -176,9 +130,9 @@ namespace HobbyHub.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> OpenHobby(int hobbyId)
+        public async Task<IActionResult> OpenHobby(int Id)
         {
-            var hobby = await dbContext.Hobbies.FindAsync(hobbyId);
+            var hobby = await dbContext.Hobbies.FindAsync(Id);
             if (hobby == null)
             {
                 return NotFound();
@@ -186,7 +140,7 @@ namespace HobbyHub.Controllers
 
             var hobbyViewModel = new HobbyViewModel
             {
-                HobbyId = hobbyId,
+                HobbyId = Id,
                 Name = hobby.Name,
                 Description = hobby.Description,
                 ImageUrl = hobby.ImageUrl,

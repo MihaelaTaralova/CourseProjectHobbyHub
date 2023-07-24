@@ -33,7 +33,7 @@ namespace HobbyHub.Web.Services.Services
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task EditCategoryAsync(int categoryId, AddCategoryViewModel model)
+        public async Task EditCategory(int categoryId, EditCategoryViewModel model)
         {
            var category = await dbContext.Categories.FindAsync(categoryId);
             if (category == null) 
@@ -45,16 +45,16 @@ namespace HobbyHub.Web.Services.Services
 
             if (model.ImageUrl != null)
             {
-                category.ImageUrl = await imageService.SaveImage(model.ImageUrl);
+                category.ImageUrl = model.ImageUrl;
             }
 
             dbContext.Categories.Update(category);
             await dbContext.SaveChangesAsync();    
         }
 
-        public async Task DeleteCategoryAsync(int categoryId)
+        public async Task DeleteCategory(int Id)
         {
-            var category = await dbContext.Categories.FindAsync(categoryId);
+            var category = await dbContext.Categories.FindAsync(Id);
             if (category == null)
             {
                 throw new ArgumentException("Category not found.");
@@ -67,7 +67,7 @@ namespace HobbyHub.Web.Services.Services
 
         public async Task<List<Category>> GetAllCategoriesAsync()
         {
-            return await dbContext.Categories.Where(c => c.IsActive).ToListAsync();
+            return await dbContext.Categories.Where(c => c.IsActive == true).ToListAsync();
         }
 
         public async Task<Category> GetCategoryByIdAsync(int categoryId)

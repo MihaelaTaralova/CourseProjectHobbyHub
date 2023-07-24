@@ -1,4 +1,5 @@
-﻿@using HobbyHubSystem.Web.ViewModels.Category;
+﻿@using HobbyHubSystem.Common;
+@using HobbyHubSystem.Web.ViewModels.Category;
 @model DisplayCategoryViewModel
 
 @{
@@ -13,6 +14,7 @@
         <div class="hobby">
             <img src="@hobby.ImageUrl" alt="@hobby.Name" />
             <p>@hobby.Name</p>
+            <a asp-controller="Hobby" asp-action="OpenHobby" asp-route-id="@hobby.HobbyId">Open Hobby</a>
         </div>
     }
 </div>
@@ -21,6 +23,16 @@
 {
     <div class="add-hobby-button-container">
         <a asp-controller="Hobby" asp-action="AddHobby" asp-route-id="@Model.CategoryId">Add Hobby</a>
+    </div>
+}
+
+@if (User.IsInRole(RoleConstants.Administrator) || User.IsInRole(RoleConstants.Moderator))
+{
+    <div class="add-hobby-button-container">
+        <a asp-controller="Category" asp-action="EditCategory" asp-route-id="@Model.CategoryId">Edit Category</a>
+    </div>
+    <div class="add-hobby-button-container">
+        <a asp-controller="Category" asp-action="Delete" asp-route-id="@Model.CategoryId">Delete Category</a>
     </div>
 }
 
@@ -46,3 +58,6 @@
         margin-top: 25px;
     }
 </style>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

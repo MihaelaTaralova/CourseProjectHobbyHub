@@ -22,7 +22,7 @@ namespace HobbyBubSystem.Data.Models
         public string Name { get; set; } = null!;
 
         [Comment("when it is false - the category is deleted")]
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
 
         [Comment("picture of the category")]
         [Required]

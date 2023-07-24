@@ -15,7 +15,7 @@ namespace HobbyHub.Web.Services.Interfaces
 
         Task AddHobbyAsync(AddHobbyViewModel hobbyViewModel, Guid userId);
 
-        Task EditHobbyAsync(int categoryId, AddHobbyViewModel model);
+        Task EditHobbyAsync(int categoryId, EditHobbyViewModel model);
 
         Task DeleteHobbyAsync(int categoryId);
 

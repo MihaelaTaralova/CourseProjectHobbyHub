@@ -1,12 +1,12 @@
-﻿@model HobbyHubSystem.Web.ViewModels.Hobby.AddHobbyViewModel
+﻿@model HobbyHubSystem.Web.ViewModels.Hobby.EditHobbyViewModel
 
 @{
-    ViewData["Title"] = "Add Hobby";
+    ViewData["Title"] = "Edit Hobby";
 }
 
-<h2>Create Hobby</h2>
+<h2>Edit Category</h2>
 
-@using (Html.BeginForm("AddHobby", "Hobby", FormMethod.Post))
+@using (Html.BeginForm("EditHobby", "Hobby", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -18,7 +18,7 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.Description)
-        @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+        @Html.TextBoxFor(model => model.Description, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.Description)
     </div>
 
@@ -27,9 +27,11 @@
         @Html.TextBoxFor(model => model.ImageUrl, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.ImageUrl)
     </div>
-        @Html.HiddenFor(model => model.CategoryId)
 
-    <div class="form-group">
-        <input type="submit" value="Add Hobby" class="btn btn-primary" />
-    </div>
+    @Html.HiddenFor(model => model.Id)
+
+    <input type="submit" value="Save Changes" class="btn btn-primary" />
+}
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }

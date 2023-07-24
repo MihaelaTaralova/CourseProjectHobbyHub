@@ -41,10 +41,10 @@ namespace HobbyBubSystem.Data.Models
         public virtual Category Category { get; set; } = null!;
 
         [Comment("before release the hobby should be approved by admin or moderator")]
-        public bool IsApproved { get; set; }
+        public bool IsApproved { get; set; } = false;
 
         [Comment("when it is false - the hobby is deleted")]
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
 
         [Comment("picture of the hobby")]
         [Required]

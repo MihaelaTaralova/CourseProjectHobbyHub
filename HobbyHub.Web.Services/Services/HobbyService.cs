@@ -65,23 +65,23 @@ namespace HobbyHub.Web.Services.Services
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task EditHobbyAsync(int categoryId, AddHobbyViewModel model)
+        public async Task EditHobbyAsync(int categoryId, EditHobbyViewModel model)
         {
             var hobby = await dbContext.Hobbies.FindAsync(categoryId);
             if (hobby == null) 
             {
                 throw new ArgumentException("Hobby not found");
             }
-
+           
             hobby.Name = model.Name;
             hobby.Description = model.Description;
-            hobby.IsApproved = true;
-            hobby.IsActive = true;
+            //hobby.IsApproved = true;
+            //hobby.IsActive = true;
 
-            if (model.ImageUrl != null)
-            {
-                hobby.ImageUrl = await imageService.SaveImage(model.ImageUrl);
-            }
+            //if (model.ImageUrl != null)
+            //{
+            //    hobby.ImageUrl = await imageService.SaveImage(model.ImageUrl);
+            //}
 
             dbContext.Hobbies.Update(hobby);
             await dbContext.SaveChangesAsync();
@@ -89,7 +89,7 @@ namespace HobbyHub.Web.Services.Services
 
         public async Task<List<Hobby>> GetAllHobbiesAsync()
         {
-            return await dbContext.Hobbies.Where(h => h.IsActive).ToListAsync();
+            return await dbContext.Hobbies.Where(h => h.IsActive == true).ToListAsync();
         }
 
         public async Task<List<Hobby>> GetHobbiesByCategoryId(int categoryId)

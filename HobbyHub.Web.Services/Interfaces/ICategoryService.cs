@@ -11,9 +11,9 @@ namespace HobbyHub.Web.Services.Interfaces
 
         Task AddCategoryAsync(AddCategoryViewModel categoryViewModel);
 
-        Task EditCategoryAsync(int categoryId, AddCategoryViewModel model);
+        Task EditCategory(int categoryId, EditCategoryViewModel model);
 
-        Task DeleteCategoryAsync(int categoryId);
+        Task DeleteCategory(int categoryId);
 
         Task<Category> GetCategoryByNameAsync(string name);
     }
