@@ -1,6 +1,5 @@
 ﻿using HobbyBubSystem.Data.Models;
 using HobbyHubSystem.Web.ViewModels.Admin;
-using HobbyHubSystem.Web.ViewModels.Category;
 using HobbyHubSystem.Web.ViewModels.Hobby;
 
 namespace HobbyHub.Web.Services.Interfaces

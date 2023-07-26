@@ -158,7 +158,7 @@ namespace HobbyHubSystem.Data.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("Answers");
+                    b.ToTable("Answers", (string)null);
                 });
 
             modelBuilder.Entity("HobbyBubSystem.Data.Models.Article", b =>
@@ -207,7 +207,7 @@ namespace HobbyHubSystem.Data.Migrations
 
                     b.HasIndex("HubId");
 
-                    b.ToTable("Articles");
+                    b.ToTable("Articles", (string)null);
                 });
 
             modelBuilder.Entity("HobbyBubSystem.Data.Models.Category", b =>
@@ -237,7 +237,7 @@ namespace HobbyHubSystem.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("HobbyBubSystem.Data.Models.Discussion.DiscussionTopic", b =>
@@ -272,7 +272,7 @@ namespace HobbyHubSystem.Data.Migrations
 
                     b.HasIndex("HubId");
 
-                    b.ToTable("DiscussionTopics");
+                    b.ToTable("DiscussionTopics", (string)null);
                 });
 
             modelBuilder.Entity("HobbyBubSystem.Data.Models.Event", b =>
@@ -319,7 +319,7 @@ namespace HobbyHubSystem.Data.Migrations
 
                     b.HasIndex("HubId");
 
-                    b.ToTable("Events");
+                    b.ToTable("Events", (string)null);
                 });
 
             modelBuilder.Entity("HobbyBubSystem.Data.Models.Hobby", b =>
@@ -377,7 +377,7 @@ namespace HobbyHubSystem.Data.Migrations
 
                     b.HasIndex("CreatorId");
 
-                    b.ToTable("Hobbies");
+                    b.ToTable("Hobbies", (string)null);
                 });
 
             modelBuilder.Entity("HobbyBubSystem.Data.Models.HobbyUserHub", b =>
@@ -392,7 +392,7 @@ namespace HobbyHubSystem.Data.Migrations
 
                     b.HasIndex("HubId");
 
-                    b.ToTable("HobbyUserHub");
+                    b.ToTable("HobbyUserHubs", (string)null);
                 });
 
             modelBuilder.Entity("HobbyBubSystem.Data.Models.Hub", b =>
@@ -431,7 +431,7 @@ namespace HobbyHubSystem.Data.Migrations
                     b.HasIndex("HobbyId")
                         .IsUnique();
 
-                    b.ToTable("Hubs");
+                    b.ToTable("Hubs", (string)null);
                 });
 
             modelBuilder.Entity("HobbyBubSystem.Data.Models.Question", b =>
@@ -473,7 +473,7 @@ namespace HobbyHubSystem.Data.Migrations
 
                     b.HasIndex("DiscussionTopicId");
 
-                    b.ToTable("Questions");
+                    b.ToTable("Questions", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>

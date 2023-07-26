@@ -35,6 +35,7 @@ builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IUserManagementService, UserManagementService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IHobbyService, HobbyService>();
+builder.Services.AddScoped<IHubService, HubService>();
 
 
 builder.Services.ConfigureApplicationCookie(options =>

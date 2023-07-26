@@ -23,5 +23,7 @@ namespace HobbyHubSystem.Web.ViewModels.Hobby
         public int CategoryId { get; set; }
 
         public int HubId { get; set; }
+
+        public bool IsJoinedHub { get; set; }
     }
 }

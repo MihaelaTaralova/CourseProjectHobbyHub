@@ -31,12 +31,27 @@ namespace HobbyHub.Web.Services.Services
                 IsActive = true,
                 IsApproved = true,
                 ImageUrl = imageUrl,
+                HubId = hobbyViewModel.HubId,
                 CreatorId = userId,
                 CategoryId = hobbyViewModel.CategoryId
             };
 
-            await dbContext.Hobbies.AddAsync(hobby);
+            var a = await dbContext.Hobbies.AddAsync(hobby);
             await dbContext.SaveChangesAsync();
+            var hub = new Hub()
+            {
+                HobbyId = a.Entity.Id,
+                Name = hobby.Name,
+                CreatorId = userId,
+                About = $"This hub belongs to hobby {hobby.Name} and all articles, events and discussions are connected with {hobby.Name} ",
+                Hobby = hobby
+            };
+            await dbContext.Hubs.AddAsync(hub);
+            await dbContext.SaveChangesAsync();
+
+            hobby.HubId = hub.Id;
+            await dbContext.SaveChangesAsync();
+
         }
 
         public async Task ApproveHobbyAsync(int hobbyId)

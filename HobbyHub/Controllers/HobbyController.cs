@@ -2,6 +2,7 @@
 using HobbyHub.Web.Services.Interfaces;
 using HobbyHubSystem.Web.ViewModels.Hobby;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace HobbyHub.Controllers
@@ -12,16 +13,20 @@ namespace HobbyHub.Controllers
         private readonly IHobbyService hobbyService;
         private readonly ICategoryService categoryService;
         private readonly IImageService imageService;
+        private readonly IHubService hubService;
 
         public HobbyController(HobbyHubDbContext _dbContext,
             IHobbyService _hobbyService,
             ICategoryService _categoryService,
-            IImageService _imageService)
+            IImageService _imageService,
+            IHubService _hubService)
         {
             this.dbContext = _dbContext;
             this.hobbyService = _hobbyService;
             this.categoryService = _categoryService;
             this.imageService = _imageService;
+            this.hubService = _hubService;
+
         }
 
         [HttpGet]
@@ -164,13 +169,25 @@ namespace HobbyHub.Controllers
                 return NotFound();
             }
 
+            //var hub = await dbContext.Hubs.FirstOrDefaultAsync(h => h.HobbyId == Id);
+
+            var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (!Guid.TryParse(userIdString, out Guid userId))
+            {
+                return BadRequest();
+            }
+
+            bool isJoinedHub = await hubService.IsUserJoinedHub(hobby.HubId, userId);
+
             var hobbyViewModel = new HobbyViewModel
             {
                 HobbyId = Id,
                 Name = hobby.Name,
                 Description = hobby.Description,
                 ImageUrl = hobby.ImageUrl,
-                HubId = hobby.HubId
+                HubId = hobby.HubId,
+                IsJoinedHub = isJoinedHub
             };
 
             return View("OpenHobby", hobbyViewModel);

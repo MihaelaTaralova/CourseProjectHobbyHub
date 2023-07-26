@@ -6,6 +6,8 @@ namespace HobbyHubSystem.Web.ViewModels.Hobby
 {
     public class AddHobbyViewModel
     {
+        public int Id { get; set; }
+
         [Required]
         [StringLength(NameMax), MinLength(NameMin)]
         public string Name { get; set; } = null!;
@@ -19,6 +21,8 @@ namespace HobbyHubSystem.Web.ViewModels.Hobby
         public string Description { get; set; } = null!;
 
         public int CategoryId { get; set; }
+
+       public int HubId { get; set; }
 
         public bool IsActive { get; set; } 
 

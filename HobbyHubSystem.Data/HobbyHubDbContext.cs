@@ -5,7 +5,7 @@ using HobbyHubSystem.Data.EntityConfiguration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
+using System.Xml.Linq;
 
 namespace HobbyHub.Data
 {
@@ -30,7 +30,9 @@ namespace HobbyHub.Data
 
         public DbSet<Question> Questions { get; set; } = null!;
 
-        DbSet<DiscussionTopic> DiscussionTopics { get; set; } = null!;
+        public DbSet<DiscussionTopic> DiscussionTopics { get; set; } = null!;
+
+        public DbSet<HobbyUserHub> HobbyUserHubs { get; set; } = null!; 
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -46,6 +48,6 @@ namespace HobbyHub.Data
             builder.ApplyConfiguration<Question>(new QuestionConfiguration());
             builder.ApplyConfiguration<HobbyUser>(new HobbyUserConfiguration());
         }
-
+        
     }
 }
