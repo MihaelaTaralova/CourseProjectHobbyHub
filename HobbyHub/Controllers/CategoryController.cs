@@ -10,15 +10,12 @@ namespace HobbyHub.Controllers
     {
         private readonly ICategoryService categoryService;
         private readonly IHobbyService hobbyService;
-        private readonly IImageService imageService;
 
         public CategoryController(ICategoryService _categoryService,
-            IHobbyService _hobbyService,
-            IImageService _imageService)
+            IHobbyService _hobbyService)
         {
             this.categoryService = _categoryService;
             this.hobbyService = _hobbyService;
-            this.imageService = _imageService;
         }
 
         [HttpGet]

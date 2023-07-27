@@ -1,6 +1,8 @@
 ﻿using HobbyBubSystem.Data.Models;
+using HobbyBubSystem.Data.Models.Account;
 using HobbyHub.Data;
 using HobbyHub.Web.Services.Interfaces;
+using HobbyHubSystem.Common;
 using HobbyHubSystem.Web.ViewModels.Admin;
 using HobbyHubSystem.Web.ViewModels.Hobby;
 using Microsoft.AspNetCore.Identity;
@@ -11,7 +13,7 @@ namespace HobbyHub.Web.Services.Services
     public class HobbyService : IHobbyService
     {
         private readonly HobbyHubDbContext dbContext;
-        private readonly IImageService imageService;
+        private readonly IImageService imageService; 
 
         public HobbyService(HobbyHubDbContext _dbContext,
             IImageService _imageService)
@@ -29,7 +31,7 @@ namespace HobbyHub.Web.Services.Services
                 Name = hobbyViewModel.Name,
                 Description = hobbyViewModel.Description,
                 IsActive = true,
-                IsApproved = true,
+                IsApproved = false,
                 ImageUrl = imageUrl,
                 HubId = hobbyViewModel.HubId,
                 CreatorId = userId,

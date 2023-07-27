@@ -36,6 +36,12 @@ namespace HobbyBubSystem.Data.Models
 
         public virtual HobbyUser Author { get; set; } = null!;
 
+        [Comment("hobby to which the article belongs")]
+        [ForeignKey(nameof(Hub))]
+        public int HubId { get; set; }
+
+        public virtual Hub Hub { get; set; } = null!;
+
         [Comment("before release the article should be approved by admin or moderator")]
         public bool IsApproved { get; set; } 
     }

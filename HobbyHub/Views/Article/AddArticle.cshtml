@@ -1,0 +1,26 @@
+﻿@model HobbyHubSystem.Web.ViewModels.Article.AddArticleViewModel
+
+<h2>Add Article</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label for="Title">Title</label>
+        <input type="text" class="form-control" id="Title" name="Title" value="@Model.Title" required />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="Content">Content</label>
+        <textarea class="form-control" id="Content" name="Content" required>@Model.Content</textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="PublishDate">Publish Date</label>
+        <input type="date" class="form-control" id="PublishDate" name="PublishDate" value="@Model.PublishDate" required />
+        <span asp-validation-for="PublishDate" class="text-danger"></span>
+    </div>
+    <input type="hidden" name="HobbyId" value="@Model.HubId" />
+    <button type="submit" class="btn btn-primary">Add Article</button>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

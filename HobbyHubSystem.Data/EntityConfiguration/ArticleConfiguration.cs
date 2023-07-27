@@ -17,6 +17,9 @@ namespace HobbyHubSystem.Data.EntityConfiguration
                 .Property(a => a.IsApproved)
                 .HasDefaultValue(false);
 
+            builder.HasOne(h => h.Hub)
+                .WithMany(h => h.Articles)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

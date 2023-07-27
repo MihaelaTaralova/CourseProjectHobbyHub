@@ -11,20 +11,14 @@ namespace HobbyHub.Controllers
     {
         private readonly HobbyHubDbContext dbContext;
         private readonly IHobbyService hobbyService;
-        private readonly ICategoryService categoryService;
-        private readonly IImageService imageService;
         private readonly IHubService hubService;
 
         public HobbyController(HobbyHubDbContext _dbContext,
             IHobbyService _hobbyService,
-            ICategoryService _categoryService,
-            IImageService _imageService,
             IHubService _hubService)
         {
             this.dbContext = _dbContext;
             this.hobbyService = _hobbyService;
-            this.categoryService = _categoryService;
-            this.imageService = _imageService;
             this.hubService = _hubService;
 
         }
@@ -49,7 +43,7 @@ namespace HobbyHub.Controllers
         }
 
         [HttpGet]
-        public  IActionResult AddHobby(int id)
+        public IActionResult AddHobby(int id)
         {
             AddHobbyViewModel model = new()
             {
@@ -61,15 +55,15 @@ namespace HobbyHub.Controllers
         [HttpPost]
         public async Task<IActionResult> AddHobby(AddHobbyViewModel hobbyViewModel)
         {
-            if (!(User.IsInRole("Administrator") || User.IsInRole("Moderator")))
-            {
-                return Forbid();
-            }
+            //if (!(User.IsInRole("Administrator") || User.IsInRole("Moderator")))
+            //{
+            //    return Forbid();
+            //}
 
             if (ModelState.IsValid)
             {
                 await hobbyService.AddHobbyAsync(hobbyViewModel, new Guid(User.FindFirst(ClaimTypes.NameIdentifier).Value));
-                return RedirectToAction("OpenCategory", "Category", new { id =  hobbyViewModel.CategoryId });
+                return RedirectToAction("OpenCategory", "Category", new { id = hobbyViewModel.CategoryId });
             }
 
             return View(hobbyViewModel);
@@ -96,7 +90,7 @@ namespace HobbyHub.Controllers
                 Name = hobby.Name,
                 Description = hobby.Description,
                 ImageUrl = hobby.ImageUrl
-        };
+            };
 
             return View(hobbyViewModel);
         }

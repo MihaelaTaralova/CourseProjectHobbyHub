@@ -74,35 +74,5 @@ namespace HobbyHub.Controllers
             return View("WelcomeHub", hubViewModel);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> JoinHub(int Id)
-        //{
-        //    var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-        //    if (userIdString == null || !Guid.TryParse(userIdString, out Guid userId))
-        //    {
-        //        return Unauthorized();
-        //    }
-
-        //    var isJoined = await hubService.IsUserJoinedHub(userId, Id);
-
-        //    if (isJoined)
-        //    {
-        //        return RedirectToAction("WelcomeHub", "Hub", new { hubId = Id });
-        //    }
-
-        //    try
-        //    {
-        //        await hubService.JoinHubAsync(Id, userId);
-        //        return RedirectToAction("WelcomeHub", "Hub", new { hubId = Id });
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ModelState.AddModelError("", ex.Message);
-        //        return RedirectToAction("OpenCategory", "Category");
-        //    }
-        //}
-
-
     }
 }

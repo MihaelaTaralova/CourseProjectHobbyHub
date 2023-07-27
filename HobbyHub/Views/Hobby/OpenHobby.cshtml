@@ -23,6 +23,12 @@
     </div>
 }
 
+@if (Model.IsJoinedHub)
+{
+<div class="welcome-hub-button-container">
+    <a asp-controller="Hub" asp-action="WelcomeHub" asp-route-id="@Model.HubId">Welcome Hub</a>
+</div>
+}
 
 @if (User.IsInRole(RoleConstants.Administrator) || User.IsInRole(RoleConstants.Moderator))
 {
@@ -34,12 +40,6 @@
     </div>
 }
 
-@if (Model.IsJoinedHub)
-{
-<div class="welcome-hub-button-container">
-    <a asp-controller="Hub" asp-action="WelcomeHub" asp-route-id="@Model.HubId">Welcome Hub</a>
-</div>
-}
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

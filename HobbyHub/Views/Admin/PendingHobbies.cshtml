@@ -1,5 +1,5 @@
 ﻿@using HobbyHubSystem.Web.ViewModels.Admin;
-@model PendingHobbiesViewModel
+@model PendingDataViewModel
 
 <h1>Pending Hobbies</h1>
 
@@ -14,24 +14,64 @@
     <tbody>
         @if (Model.PendingHobbies.Any())
         {
-        @foreach (var hobby in Model.PendingHobbies)
-        {
-            <tr>
-                <td>@hobby.Name</td>
-                <td>@hobby.Description</td>
-                <td>@hobby.ImageUrl</td>
-                <td>
-                    <form method="post" asp-controller="Admin" asp-action="ApproveHobby">
-                        <input type="hidden" name="hobbyId" value="@hobby.HobbyId" />
-                        <button type="submit">Approve</button>
-                    </form>
-                </td>
-            </tr>
+            @foreach (var hobby in Model.PendingHobbies)
+            {
+                <tr>
+                    <td>@hobby.Name</td>
+                    <td>@hobby.Description</td>
+                    <td>@hobby.ImageUrl</td>
+                    <td>
+                        <form method="post" asp-controller="Admin" asp-action="ApproveHobby">
+                            <input type="hidden" name="hobbyId" value="@hobby.HobbyId" />
+                            <button type="submit">Approve</button>
+                        </form>
+                    </td>
+                </tr>
             }
         }
         else
         {
-            <p>No hobbies waiting for approval.</p>
+            <tr>
+                <td colspan="4">No hobbies waiting for approval.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h1>Pending Articles</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Publish Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.PendingArticles.Any())
+        {
+            @foreach (var article in Model.PendingArticles)
+            {
+                <tr>
+                    <td>@article.Title</td>
+                    <td>@article.Content</td>
+                    <td>@article.PublishDate</td>
+                    <td>
+                        <form method="post" asp-controller="Admin" asp-action="ApproveArticle">
+                            <input type="hidden" name="articleId" value="@article.Id" />
+                            <button type="submit">Approve</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4">No articles waiting for approval.</td>
+            </tr>
         }
     </tbody>
 </table>

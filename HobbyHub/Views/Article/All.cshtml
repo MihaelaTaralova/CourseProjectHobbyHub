@@ -1,0 +1,38 @@
+﻿@model HobbyHubSystem.Web.ViewModels.Article.AllArticleViewModel
+
+<h2>All Articles</h2>
+
+<a class="btn btn-primary" asp-controller="Article" asp-action="AddArticle">Add Article</a>
+
+
+@if (Model.Articles.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Publish Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var article in Model.Articles)
+            {
+                <tr>
+                    <td>@article.Title</td>
+                    <td>@article.AuthorName</td>
+                    <td>@article.PublishDate.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No articles found.</p>
+}
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
