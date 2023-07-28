@@ -11,11 +11,15 @@
 <div class="hobbies-container">
     @foreach (var hobby in Model.Hobbies)
     {
+        if (hobby.IsAproved == true)
+        {
         <div class="hobby">
             <img src="@hobby.ImageUrl" alt="@hobby.Name" />
             <p>@hobby.Name</p>
             <a asp-controller="Hobby" asp-action="OpenHobby" asp-route-id="@hobby.HobbyId">Open Hobby</a>
         </div>
+            
+        }
     }
 </div>
 

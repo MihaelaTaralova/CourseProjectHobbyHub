@@ -31,7 +31,8 @@ namespace HobbyHub.Controllers
             {
                 HobbyId = h.Id,
                 Name = h.Name,
-                ImageUrl = h.ImageUrl
+                ImageUrl = h.ImageUrl,
+                IsAproved = h.IsApproved
             }).ToList();
 
             var model = new AllHobbiesViewModel
@@ -55,10 +56,10 @@ namespace HobbyHub.Controllers
         [HttpPost]
         public async Task<IActionResult> AddHobby(AddHobbyViewModel hobbyViewModel)
         {
-            //if (!(User.IsInRole("Administrator") || User.IsInRole("Moderator")))
-            //{
-            //    return Forbid();
-            //}
+            if (!(User.IsInRole("Administrator") || User.IsInRole("Moderator")))
+            {
+                return Forbid();
+            }
 
             if (ModelState.IsValid)
             {

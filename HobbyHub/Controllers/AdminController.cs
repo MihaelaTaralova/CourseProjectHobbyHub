@@ -31,7 +31,7 @@ namespace HobbyHub.Controllers
         public async Task<IActionResult> ApproveHobby(int hobbyId)
         {
             await hobbyService.ApproveHobbyAsync(hobbyId);
-            return RedirectToAction("PendingHobbies");
+            return RedirectToAction("PendingData");
         }
 
 
@@ -48,7 +48,7 @@ namespace HobbyHub.Controllers
         public async Task<IActionResult> ApproveArticle(int articleId)
         {
             await articleService.ApproveArticleAsync(articleId);
-            return RedirectToAction("PendingArticles");
+            return RedirectToAction("PendingData");
         }
 
         [HttpGet]
