@@ -4,6 +4,7 @@ using HobbyHub.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HobbyHubSystem.Data.Migrations
 {
     [DbContext(typeof(HobbyHubDbContext))]
-    partial class HobbyHubDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230728132051_HobbyConfiguration")]
+    partial class HobbyConfiguration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -183,10 +185,6 @@ namespace HobbyHubSystem.Data.Migrations
                     b.Property<int>("HubId")
                         .HasColumnType("int")
                         .HasComment("hobby to which the article belongs");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit")
-                        .HasComment("when it is false - the article is deleted");
 
                     b.Property<bool>("IsApproved")
                         .ValueGeneratedOnAdd()

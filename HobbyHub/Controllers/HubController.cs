@@ -37,14 +37,13 @@ namespace HobbyHub.Controllers
 
             if (isJoined)
             {
-                return View("JoinHub", "Hub");
+                return Conflict(new { hubId = Id });
             }
 
             try
             {
                 await hubService.JoinHubAsync(Id, userId);
-                return RedirectToAction("WelcomeHub", "Hub", new { hubId = Id });
-
+                return Ok(new { hubId = Id });
             }
             catch (Exception ex)
             {

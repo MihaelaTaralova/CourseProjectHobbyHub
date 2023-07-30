@@ -1,0 +1,22 @@
+﻿@using HobbyHubSystem.Common;
+@model HobbyHubSystem.Web.ViewModels.Article.ArticleViewModel
+
+<h2>@Model.Title</h2>
+
+<p>Author: @Model.AuthorName</p>
+
+<p>@Model.Content</p>
+
+@if (User.IsInRole(RoleConstants.Administrator) || User.IsInRole(RoleConstants.Moderator))
+{
+    <div class="add-hobby-button-container">
+        <a asp-controller="Article" asp-action="EditArticle" asp-route-id="@Model.Id">Edit Article</a>
+    </div>
+    <div class="add-hobby-button-container">
+        <a asp-controller="Article" asp-action="DeleteArticle" asp-route-id="@Model.Id">Delete Article</a>
+    </div>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,7 +1,6 @@
 ﻿using HobbyHub.Web.Services.Interfaces;
 using HobbyHub.Web.Services.Services;
 using HobbyHubSystem.Web.ViewModels.Article;
-using HobbyHubSystem.Web.ViewModels.Category;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -13,7 +12,7 @@ namespace HobbyHub.Controllers
 
         public ArticleController(IArticleService _articleService)
         {
-            this.articleService = _articleService;   
+            this.articleService = _articleService;
         }
         public async Task<IActionResult> All()
         {
@@ -25,11 +24,13 @@ namespace HobbyHub.Controllers
                 Title = a.Title,
                 AuthorName = a.Author.LastName,
                 PublishDate = a.PublishDate,
+                HubId = a.HubId,
+                IsApproved = a.IsApproved,
             }).ToList();
 
-            var viewModel = new AllArticleViewModel 
-            { 
-                Articles = articleViewModel 
+            var viewModel = new AllArticleViewModel
+            {
+                Articles = articleViewModel
             };
 
             return View(viewModel);
@@ -38,16 +39,12 @@ namespace HobbyHub.Controllers
         [HttpGet]
         public IActionResult AddArticle(int id)
         {
-            //if (!(User.IsInRole("Administrator") || User.IsInRole("Moderator")))
-            //{
-            //    return Forbid();
-            //}
             AddArticleViewModel model = new()
             {
                 HubId = id
             };
-
             return View(model);
+
         }
 
         [HttpPost]
@@ -57,14 +54,111 @@ namespace HobbyHub.Controllers
             //{
             //    return Forbid();
             //}
+            var isAppoved = User.IsInRole("Administrator") || User.IsInRole("Moderator");
 
             if (ModelState.IsValid)
             {
-                await articleService.AddArticleAsync(articleViewModel, new Guid(User.FindFirst(ClaimTypes.NameIdentifier).Value));
+                await articleService.AddArticleAsync(articleViewModel, new Guid(User.FindFirst(ClaimTypes.NameIdentifier).Value), isAppoved);
                 return RedirectToAction("All");
             }
 
             return View(articleViewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ViewArticle(int id)
+        {
+            var articleViewModel = await articleService.GetArticleWithAuthorAsync(id);
+
+            if (articleViewModel == null)
+            {
+                return NotFound();
+            }
+
+            return View(articleViewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteArticle(int id)
+        {
+            var article = await articleService.GetArticleByIdAsync(id);
+
+            if (article == null)
+            {
+                return NotFound();
+            }
+
+            if (article.IsActive == false)
+            {
+                return NotFound();
+            }
+
+            var articleModel = new DeleteArticleViewModel
+            {
+                Id = article.Id,
+                Title = article.Title
+            };
+
+            return View(articleModel);
+        }
+
+        [HttpPost, ActionName("DeleteArticle")]
+
+        public async Task<IActionResult> DeleteArticleConfirmed(int id)
+        {
+            try
+            {
+                await articleService.DeleteArticle(id);
+                return RedirectToAction("All", "Article");
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditArticle(int id)
+        {
+            var article = await articleService.GetArticleByIdAsync(id);
+            if (article == null)
+            {
+                return NotFound();
+            }
+
+            if (article.IsActive == false)
+            {
+                return NotFound();
+            }
+
+            var articleViewModel = new EditArticleViewModel
+            {
+                Id = article.Id,
+                Title = article.Title,
+                Content = article.Content
+            };
+
+            return View(articleViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditArticle(int id, EditArticleViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                try
+                {
+                    await articleService.EditArticle(id, model);
+                    return RedirectToAction("ViewArticle", "Article", new { id = model.Id, name = model.Title }, fragment: null);
+                }
+                catch (ArgumentException ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+            }
+                return View(model);
+           
         }
     }
 }

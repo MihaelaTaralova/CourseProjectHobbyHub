@@ -2,11 +2,11 @@
 
 <h2>All Articles</h2>
 
-<a class="btn btn-primary" asp-controller="Article" asp-action="AddArticle">Add Article</a>
-
+<a class="btn btn-primary" asp-controller="Article" asp-action="AddArticle" asp-route-id="@Model.HubId">Add Article</a>
 
 @if (Model.Articles.Any())
 {
+    
     <table class="table">
         <thead>
             <tr>
@@ -18,11 +18,14 @@
         <tbody>
             @foreach (var article in Model.Articles)
             {
-                <tr>
-                    <td>@article.Title</td>
+                if (article.IsApproved == true)
+                {
+                    <tr>
+                        <td>@article.Title</td>
                     <td>@article.AuthorName</td>
                     <td>@article.PublishDate.ToShortDateString()</td>
                 </tr>
+                }
             }
         </tbody>
     </table>

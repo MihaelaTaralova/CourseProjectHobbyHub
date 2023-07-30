@@ -51,10 +51,11 @@
 
                 const response = await fetch(url, { method: 'POST' });
 
-                if (response.ok) {
+                if (response.ok || response.status === 409) { 
                     // Успешно присъединяване към хъба
                     redirectToWelcomeHub();
-                } else {
+                }
+                else {
                     // Грешка при присъединяване към хъба
                     alert('Error joining hub.');
                 }
@@ -65,7 +66,7 @@
         }
 
         function redirectToWelcomeHub() {
-            window.location.href = '@Url.Action("WelcomeHub", "Hub", new { hubId = Model.HubId })';
+            window.location.href = '@Url.Action("WelcomeHub", "Hub", new { id = Model.HubId })';
         }
     </script>
 

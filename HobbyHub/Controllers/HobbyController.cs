@@ -32,7 +32,7 @@ namespace HobbyHub.Controllers
                 HobbyId = h.Id,
                 Name = h.Name,
                 ImageUrl = h.ImageUrl,
-                IsAproved = h.IsApproved
+                IsApproved = h.IsApproved
             }).ToList();
 
             var model = new AllHobbiesViewModel
@@ -56,14 +56,16 @@ namespace HobbyHub.Controllers
         [HttpPost]
         public async Task<IActionResult> AddHobby(AddHobbyViewModel hobbyViewModel)
         {
-            if (!(User.IsInRole("Administrator") || User.IsInRole("Moderator")))
-            {
-                return Forbid();
-            }
+            //if (!(User.IsInRole("Administrator") || User.IsInRole("Moderator")))
+            //{
+            //    return Forbid();
+            //}
+
+            var isAppoved = User.IsInRole("Administrator") || User.IsInRole("Moderator");
 
             if (ModelState.IsValid)
             {
-                await hobbyService.AddHobbyAsync(hobbyViewModel, new Guid(User.FindFirst(ClaimTypes.NameIdentifier).Value));
+                await hobbyService.AddHobbyAsync(hobbyViewModel, new Guid(User.FindFirst(ClaimTypes.NameIdentifier).Value), isAppoved);
                 return RedirectToAction("OpenCategory", "Category", new { id = hobbyViewModel.CategoryId });
             }
 

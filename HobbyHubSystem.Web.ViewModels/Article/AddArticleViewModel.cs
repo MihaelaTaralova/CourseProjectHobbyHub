@@ -23,7 +23,5 @@ namespace HobbyHubSystem.Web.ViewModels.Article
         public int HubId { get; set; }
 
         public Guid AuthorId { get; set; }
-               
-        public bool IsApproved { get; set; }
     }
 }

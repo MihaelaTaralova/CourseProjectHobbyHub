@@ -19,7 +19,8 @@ namespace HobbyHubSystem.Data.EntityConfiguration
 
             builder.HasOne(h => h.Hub)
                 .WithMany(h => h.Articles)
-                .OnDelete(DeleteBehavior.NoAction);
+                .HasForeignKey(q => q.HubId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -11,7 +11,7 @@
 <div class="hobbies-container">
     @foreach (var hobby in Model.Hobbies)
     {
-        if (hobby.IsAproved == true)
+        if (hobby.IsApproved == true)
         {
         <div class="hobby">
             <img src="@hobby.ImageUrl" alt="@hobby.Name" />

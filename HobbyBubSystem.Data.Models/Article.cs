@@ -43,6 +43,9 @@ namespace HobbyBubSystem.Data.Models
         public virtual Hub Hub { get; set; } = null!;
 
         [Comment("before release the article should be approved by admin or moderator")]
-        public bool IsApproved { get; set; } 
+        public bool IsApproved { get; set; }
+
+        [Comment("when it is false - the article is deleted")]
+        public bool IsActive { get; set; } = true;
     }
 }

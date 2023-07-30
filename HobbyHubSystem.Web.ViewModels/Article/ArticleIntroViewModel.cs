@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace HobbyHubSystem.Web.ViewModels.Article
 {
     public class ArticleIntroViewModel
@@ -13,7 +8,9 @@ namespace HobbyHubSystem.Web.ViewModels.Article
 
         public string AuthorName { get; set; }
 
-        public int HobbyId { get; set; }
+        public int HubId { get; set; }
         public DateTime PublishDate { get; set; }
+
+        public bool IsApproved { get; set; }
     }
 }

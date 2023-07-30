@@ -17,7 +17,12 @@ namespace HobbyHubSystem.Data.EntityConfiguration
                .WithMany(h => h.Hobbies)
                .HasForeignKey(q => q.CategoryId)
                .OnDelete(DeleteBehavior.Restrict);
-                
+
+            builder
+                .HasOne(h => h.Hub)
+                .WithOne(h => h.Hobby)
+                .OnDelete(DeleteBehavior.Restrict);
+
 
             //builder.HasData(this.GenerateHobbies());
 

@@ -22,7 +22,7 @@ namespace HobbyHub.Web.Services.Services
             this.imageService = _imageService;
         }
 
-        public async Task AddHobbyAsync(AddHobbyViewModel hobbyViewModel, Guid userId)
+        public async Task AddHobbyAsync(AddHobbyViewModel hobbyViewModel, Guid userId, bool isApproved = false)
         {
             var imageUrl = await imageService.SaveImage(hobbyViewModel.ImageUrl);
 
@@ -31,7 +31,7 @@ namespace HobbyHub.Web.Services.Services
                 Name = hobbyViewModel.Name,
                 Description = hobbyViewModel.Description,
                 IsActive = true,
-                IsApproved = false,
+                IsApproved = isApproved,
                 ImageUrl = imageUrl,
                 HubId = hobbyViewModel.HubId,
                 CreatorId = userId,

@@ -2,25 +2,29 @@
 
 <h2>Add Article</h2>
 
-<form method="post">
+<form asp-controller="Article" asp-action="AddArticle" method="post">
+    <input type="hidden" asp-for="HubId" />
     <div class="form-group">
-        <label for="Title">Title</label>
-        <input type="text" class="form-control" id="Title" name="Title" value="@Model.Title" required />
+        <label asp-for="Title">Title:</label>
+        <input asp-for="Title" class="form-control" />
         <span asp-validation-for="Title" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label for="Content">Content</label>
-        <textarea class="form-control" id="Content" name="Content" required>@Model.Content</textarea>
+        <label asp-for="Content">Content:</label>
+        <textarea asp-for="Content" class="form-control" rows="5"></textarea>
         <span asp-validation-for="Content" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label for="PublishDate">Publish Date</label>
-        <input type="date" class="form-control" id="PublishDate" name="PublishDate" value="@Model.PublishDate" required />
+        <label asp-for="PublishDate">Publish Date:</label>
+        <input asp-for="PublishDate" class="form-control" type="date" />
         <span asp-validation-for="PublishDate" class="text-danger"></span>
     </div>
-    <input type="hidden" name="HobbyId" value="@Model.HubId" />
+
+    <input type="hidden" asp-for="HubId" value="@Model.HubId" />
+
     <button type="submit" class="btn btn-primary">Add Article</button>
 </form>
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

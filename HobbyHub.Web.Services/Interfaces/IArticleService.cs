@@ -8,18 +8,21 @@ namespace HobbyHub.Web.Services.Interfaces
     {
         Task<List<Article>> GetAllArticlesAsync();
 
-        Task<Article> GetCategoryByIdAsync(int Id);
+        Task<Article> GetArticleByIdAsync(int Id);
 
-        Task AddArticleAsync(AddArticleViewModel articleViewModel, Guid AuthorId);
+        Task AddArticleAsync(AddArticleViewModel articleViewModel, Guid AuthorId, bool isApproved = false);
 
         Task EditArticle(int Id, EditArticleViewModel model);
 
-        Task DeleteArticle(int Id);
+        Task DeleteArticle(int articleId);
 
         Task<Article> GetArticleByNameAsync(string title);
 
         Task<PendingArticlesViewModel> GetPendingArticlesAsync();
 
         Task ApproveArticleAsync(int Id);
+
+        Task<ArticleViewModel> GetArticleWithAuthorAsync(int articleId);
+
     }
 }

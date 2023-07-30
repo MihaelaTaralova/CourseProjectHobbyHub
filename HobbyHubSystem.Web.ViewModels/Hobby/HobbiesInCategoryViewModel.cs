@@ -15,6 +15,6 @@ namespace HobbyHubSystem.Web.ViewModels.Hobby
         [StringLength(ImageUrlMaxLength)]
         public string ImageUrl { get; set; } = null!;
 
-        public bool IsAproved { get; set; }
+        public bool IsApproved { get; set; }
     }
 }

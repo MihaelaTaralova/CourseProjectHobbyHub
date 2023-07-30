@@ -12,7 +12,7 @@ namespace HobbyHub.Web.Services.Interfaces
 
         Task<Hobby> GetHobbyByIdAsync(int categoryId);
 
-        Task AddHobbyAsync(AddHobbyViewModel hobbyViewModel, Guid userId);
+        Task AddHobbyAsync(AddHobbyViewModel hobbyViewModel, Guid userId, bool isApproved = false);
 
         Task EditHobbyAsync(int categoryId, EditHobbyViewModel model);
 

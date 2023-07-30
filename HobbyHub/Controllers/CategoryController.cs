@@ -57,7 +57,7 @@ namespace HobbyHub.Controllers
                 HobbyId = h.Id,
                 Name = h.Name,
                 ImageUrl = h.ImageUrl,
-                IsAproved = h.IsApproved
+                IsApproved = h.IsApproved
             }).ToList();
 
             var categoryViewModel = new DisplayCategoryViewModel
