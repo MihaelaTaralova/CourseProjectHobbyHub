@@ -14,9 +14,10 @@ namespace HobbyHub.Controllers
         {
             this.articleService = _articleService;
         }
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(int hubId)
         {
-            var articles = await articleService.GetAllArticlesAsync();
+            var allArticles = await articleService.GetAllArticlesAsync();
+            var articles = allArticles.Where(a => a.IsActive == true).ToList();
 
             var articleViewModel = articles.Select(a => new ArticleIntroViewModel
             {
@@ -30,7 +31,8 @@ namespace HobbyHub.Controllers
 
             var viewModel = new AllArticleViewModel
             {
-                Articles = articleViewModel
+                Articles = articleViewModel,
+                HubId = hubId
             };
 
             return View(viewModel);
@@ -41,7 +43,8 @@ namespace HobbyHub.Controllers
         {
             AddArticleViewModel model = new()
             {
-                HubId = id
+                HubId = id,
+                PublishDate = DateTime.Now,
             };
             return View(model);
 
@@ -103,7 +106,6 @@ namespace HobbyHub.Controllers
         }
 
         [HttpPost, ActionName("DeleteArticle")]
-
         public async Task<IActionResult> DeleteArticleConfirmed(int id)
         {
             try
@@ -145,7 +147,7 @@ namespace HobbyHub.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditArticle(int id, EditArticleViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 try
                 {

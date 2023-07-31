@@ -57,7 +57,7 @@ namespace HobbyHub.Web.Services.Services
             }
 
             article.IsActive = false;
-            dbContext.Update(article);
+            dbContext.Articles.Update(article);
             await dbContext.SaveChangesAsync();
         }
 
@@ -67,9 +67,9 @@ namespace HobbyHub.Web.Services.Services
 
             if(article == null) 
             {
-                throw new ArgumentException("Article not found")
+                throw new ArgumentException("Article not found");
                     
-            };
+            }
 
             article.Title = model.Title;
             article.Content = model.Content;
@@ -80,7 +80,7 @@ namespace HobbyHub.Web.Services.Services
 
         public async Task<List<Article>> GetAllArticlesAsync()
         {
-            return await dbContext.Articles.ToListAsync();
+            return await dbContext.Articles.Include(a => a.Author).ToListAsync();
         }
 
         public async Task<Article> GetArticleByNameAsync(string title)

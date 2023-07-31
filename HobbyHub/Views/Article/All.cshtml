@@ -24,6 +24,7 @@
                         <td>@article.Title</td>
                     <td>@article.AuthorName</td>
                     <td>@article.PublishDate.ToShortDateString()</td>
+                    <td><a asp-controller="Article" asp-action="ViewArticle" asp-route-id="@article.Id">View Article</a></td>
                 </tr>
                 }
             }
