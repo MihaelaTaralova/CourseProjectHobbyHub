@@ -4,11 +4,14 @@
     {
         public static class HobbyUser
         {
+            public const int UserNameMax = 15;
+            public const int UserNameMin = 5;
+
             public const int FirstNameMax = 25;
-            public const int FirstNameMin = 5;
+            public const int FirstNameMin = 2;
 
             public const int LastNameMax = 25;
-            public const int LastNameMin = 5;
+            public const int LastNameMin = 2;
 
             public const int ImageUrlMaxLength = 2048;
         }

@@ -2,6 +2,8 @@
 using HobbyHub.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using HobbyHubSystem.Web.ViewModels.Account;
+using Microsoft.EntityFrameworkCore;
+using HobbyHub.Data;
 
 namespace HobbyHub.Web.Services.Services
 {
@@ -28,15 +30,16 @@ namespace HobbyHub.Web.Services.Services
             var user = new HobbyUser()
             {
                 Email = model.Email,
-                UserName = model.FirstName,
+                UserName = model.FirstName+" "+model.LastName,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Gender = model.Gender,
                 ImageUrl = imageUrl
-        };
+            };
             var result = await userManager.CreateAsync(user, model.Password);
 
             return result;
+
 
         }
 
@@ -52,5 +55,6 @@ namespace HobbyHub.Web.Services.Services
 
             return null;
         }
+
     }
 }

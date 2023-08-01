@@ -5,6 +5,7 @@ using HobbyHubSystem.Common;
 using HobbyHubSystem.Web.ViewModels.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace HobbyHub.Controllers
 {
@@ -46,7 +47,6 @@ namespace HobbyHub.Controllers
             if (result.Succeeded)
             {
                 var user = await userManager.FindByEmailAsync(registerViewModel.Email);
-                //await userManager.AddToRoleAsync(user, "User");
                 await signInManager.SignInAsync(user, isPersistent: false);
 
                 return RedirectToAction("Index", "Home");
@@ -116,5 +116,6 @@ namespace HobbyHub.Controllers
             await userManagementService.AddUsersToRoles();
             return RedirectToAction("Index", "Home");
         }
+
     }
 }
