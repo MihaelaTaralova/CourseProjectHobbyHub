@@ -2,6 +2,9 @@
 using HobbyBubSystem.Data.Models.Account;
 using HobbyHub.Data;
 using HobbyHub.Web.Services.Interfaces;
+using HobbyHubSystem.Web.ViewModels.Member;
+using HobbyHubSystem.Web.ViewModels.Member.ServiceModel;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace HobbyHub.Web.Services.Services
@@ -24,5 +27,11 @@ namespace HobbyHub.Web.Services.Services
 
             return members;
         }
+
+        public async Task<HobbyUser> GetHobbyUserByUsernameAsync(string username)
+        {
+            return await dbContext.Users.FirstOrDefaultAsync(u => u.UserName == username);
+        }
+
     }
 }

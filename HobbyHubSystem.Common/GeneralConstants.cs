@@ -4,6 +4,8 @@
     {
         public const int ReleaseYear = 2023;
 
-        //public static string[] ImageFormats = new string[] { ".jpg", ".png", ".jpeg" };
+        public const int DefaultPage = 1;
+
+        public const int EntitiesPerPage = 6;
     }
 }

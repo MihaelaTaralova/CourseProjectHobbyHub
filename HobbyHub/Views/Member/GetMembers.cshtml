@@ -6,10 +6,10 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<div id="search-members-container">
+@*<div id="search-members-container">
     <input type="text" id="search-input" placeholder="Search members...">
     <button type="button" id="search-button" class="btn btn-primary">Search</button>
-</div>
+</div>*@
 
 <div id="members-list-container">
     @if (Model.Members.Any())
@@ -33,7 +33,7 @@
                             </div>
                         </td>
                         <td>
-                            <a href="@Url.Action("ViewProfile", "Member", new { id = member.Id })" class="btn btn-primary">View Profile</a>
+                            <a href="@Url.Action("ViewProfile", "Member", new { username = member.UserName })" class="btn btn-primary">View Profile</a>
                         </td>
                     </tr>
                 }
@@ -65,4 +65,16 @@
         }
     </style>
 </section>
+}
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+VrWh8P7J/jB0XaHE+EpG4/3hd1LAgwR3XmFFKOEQ8vbSW5" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $("#search-button").click(function () {
+                var searchTerm = $("#search-input").val().trim();
+                window.location.href = '@Url.Action("Members", "Member", new { id = Model.HubId })?searchTerm=' + searchTerm;
+            });
+        });
+    </script>
 }
