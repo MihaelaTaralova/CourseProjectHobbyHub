@@ -1,0 +1,68 @@
+﻿@model HobbyHubSystem.Web.ViewModels.Member.AllMembersViewModel
+
+@{
+    ViewData["Title"] = "Hub Members";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div id="search-members-container">
+    <input type="text" id="search-input" placeholder="Search members...">
+    <button type="button" id="search-button" class="btn btn-primary">Search</button>
+</div>
+
+<div id="members-list-container">
+    @if (Model.Members.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>View Profile</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var member in Model.Members)
+                {
+                    <tr>
+                        <td><img src="@member.ImageUrl" alt="Member Image" class="member-image"></td>
+                        <td>
+                            <div class="member-info">
+                                <span>@member.Name</span>
+                            </div>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("ViewProfile", "Member", new { id = member.Id })" class="btn btn-primary">View Profile</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No members found.</p>
+    }
+</div>
+
+@section Styles {
+    <style>
+        .member-image {
+            max-width: 100px;
+            max-height: 100px;
+        }
+
+        .small-member-image {
+            max-width: 50px;
+            max-height: 50px;
+            margin-right: 10px;
+        }
+
+        .member-info {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</section>
+}
