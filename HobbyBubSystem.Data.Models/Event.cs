@@ -43,11 +43,13 @@ namespace HobbyBubSystem.Data.Models
         [MaxLength(LocationMax)]
         public string Location { get; set; } = null!;
 
+        [Comment("hub where the event belongs")]
+        [ForeignKey(nameof(Hub))]
+        public int HubId { get; set; }
+
+        public virtual Hub Hub { get; set; } = null!;
+
         [Comment("people who will attend the event")]
         public virtual ICollection<HobbyUser> HobbyUsers { get; set; }
-
-        // събитието ще се качва само от модератора
-
-
     }
 }

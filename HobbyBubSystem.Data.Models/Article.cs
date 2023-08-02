@@ -36,7 +36,7 @@ namespace HobbyBubSystem.Data.Models
 
         public virtual HobbyUser Author { get; set; } = null!;
 
-        [Comment("hobby to which the article belongs")]
+        [Comment("hub where the article belongs")]
         [ForeignKey(nameof(Hub))]
         public int HubId { get; set; }
 

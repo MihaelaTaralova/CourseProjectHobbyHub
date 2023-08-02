@@ -25,4 +25,8 @@
     <ProjectReference Include="..\HobbyHubSystem.Web.ViewModels\HobbyHubSystem.Web.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Event\" />
+  </ItemGroup>
+
 </Project>
