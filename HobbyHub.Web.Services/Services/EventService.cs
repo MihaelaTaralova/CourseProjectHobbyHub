@@ -14,9 +14,20 @@ namespace HobbyHub.Web.Services.Services
             this.dbContext = _dbContext;
         }
 
-        public Task AddEventAsync(AddEventViewModel eventViewModel)
+        public async Task AddEventAsync(AddEventViewModel eventViewModel)
         {
-            throw new NotImplementedException();
+            var addEvent = new Event()
+            {
+                Title = eventViewModel.Title,
+                Description = eventViewModel.Description,
+                CreatorId = eventViewModel.CreatorId,
+                Location = eventViewModel.Location,
+                DateOfEvent = eventViewModel.DateOfEvent,
+                HubId = eventViewModel.HubId
+            };
+
+            await dbContext.Events.AddAsync(addEvent);
+            await dbContext.SaveChangesAsync();
         }
 
         public Task DeleteEvent(int Id)

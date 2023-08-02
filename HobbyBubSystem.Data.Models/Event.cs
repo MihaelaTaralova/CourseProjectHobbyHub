@@ -49,6 +49,9 @@ namespace HobbyBubSystem.Data.Models
 
         public virtual Hub Hub { get; set; } = null!;
 
+        [Comment("when it is false - the event is deleted")]
+        public bool IsActive { get; set; } = true;
+
         [Comment("people who will attend the event")]
         public virtual ICollection<HobbyUser> HobbyUsers { get; set; }
     }

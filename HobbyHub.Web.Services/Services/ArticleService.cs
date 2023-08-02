@@ -29,7 +29,7 @@ namespace HobbyHub.Web.Services.Services
                 IsApproved = isApproved
             };
 
-            await dbContext.AddAsync(article);
+            await dbContext.Articles.AddAsync(article);
             await dbContext.SaveChangesAsync();
         }
 
