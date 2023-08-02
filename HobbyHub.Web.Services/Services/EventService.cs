@@ -2,6 +2,7 @@
 using HobbyHub.Data;
 using HobbyHub.Web.Services.Interfaces;
 using HobbyHubSystem.Web.ViewModels.Event;
+using Microsoft.EntityFrameworkCore;
 
 namespace HobbyHub.Web.Services.Services
 {
@@ -30,39 +31,83 @@ namespace HobbyHub.Web.Services.Services
             await dbContext.SaveChangesAsync();
         }
 
-        public Task DeleteEvent(int Id)
+        public async Task DeleteEvent(int Id)
         {
-            throw new NotImplementedException();
+            var eventForDelete = await dbContext.Events.FindAsync(Id);
+
+            if (eventForDelete != null)
+            {
+                throw new ArgumentException("Article not found");
+            }
+
+            eventForDelete.IsActive = false;
+            dbContext.Events.Update(eventForDelete);
+            await dbContext.SaveChangesAsync();
         }
 
-        public Task EditEvent(int Id, EditEventViewModel model)
+        public async Task EditEvent(int Id, EditEventViewModel model)
         {
-            throw new NotImplementedException();
+            var editEvent = await dbContext.Events.FindAsync(Id);
+            if (editEvent != null)
+            {
+                throw new ArgumentException("Event not found");
+            }
+
+            editEvent.Title = model.Title;
+            editEvent.Description = model.Description;
+            editEvent.Location = model.Location;
+            editEvent.DateOfEvent = model.DateOfEvent;
+
+            dbContext.Events.Update(editEvent);
+            await dbContext.SaveChangesAsync();
         }
 
-        public Task<List<Event>> GetAllEventsAsync()
+        public async Task<List<Event>> GetAllEventsAsync()
         {
-            throw new NotImplementedException();
+            return await dbContext.Events.ToListAsync();
         }
 
-        public Task<Event> GetEventByIdAsync(int Id)
+        public async Task<Event> GetEventByIdAsync(int Id)
         {
-            throw new NotImplementedException();
+            return await dbContext.Events.FindAsync(Id);
         }
 
-        public Task<Event> GetEventByNameAsync(string title)
+        public async Task<Event> GetEventByNameAsync(string title)
         {
-            throw new NotImplementedException();
+            return await dbContext.Events.FirstOrDefaultAsync(e => e.Title == title);
         }
 
-        public Task<bool> IsUserJoinedEvent(int eventId, Guid userId)
+        public async Task<bool> IsUserJoinedEvent(int Id, Guid userId)
         {
-            throw new NotImplementedException();
+            var isUserJoined = await dbContext.HobbyUserEvents.FirstOrDefaultAsync(e => e.EventId == Id && e.HobbyUserId == userId);
+
+            return isUserJoined != null;
         }
 
-        public Task JoinEventAsync(int eventId, Guid userId)
+        public async Task JoinEventAsync(int Id, Guid userId)
         {
-            throw new NotImplementedException();
+            var eventToJoin = await dbContext.Events.FindAsync(Id);
+
+            if (eventToJoin != null)
+            {
+                throw new ArgumentException("Event not found");
+            }
+
+            var isUserJoined = await dbContext.HobbyUserEvents.FirstOrDefaultAsync(e => e.EventId == Id && e.HobbyUserId == userId);
+
+            if (isUserJoined != null)
+            {
+                throw new ArgumentException("You already joined the event.");
+            }
+
+            var eventParticipation = new HobbyUserEvent
+            {
+                EventId = Id,
+                HobbyUserId = userId
+            };
+
+            dbContext.HobbyUserEvents.Add(eventParticipation);
+            await dbContext.SaveChangesAsync();
         }
     }
 }

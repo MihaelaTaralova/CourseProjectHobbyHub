@@ -20,7 +20,7 @@ namespace HobbyHub.Web.Services.Interfaces
 
         Task JoinEventAsync(int eventId, Guid userId);
 
-        Task<bool> IsUserJoinedEvent(int eventId, Guid userId);
+       Task<bool> IsUserJoinedEvent(int eventId, Guid userId);
 
     }
 }

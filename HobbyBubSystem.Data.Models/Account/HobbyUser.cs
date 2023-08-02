@@ -13,6 +13,7 @@ namespace HobbyBubSystem.Data.Models.Account
             this.Questions = new HashSet<Question>();
             this.Answers = new HashSet<Answer>();
             this.HobbyUsersHubs = new HashSet<HobbyUserHub>();
+            this.HobbyUserEvents = new HashSet<HobbyUserEvent>();
         }
 
         [Required]
@@ -39,5 +40,7 @@ namespace HobbyBubSystem.Data.Models.Account
         public virtual ICollection<Answer> Answers { get; set; }
 
         public virtual ICollection<HobbyUserHub> HobbyUsersHubs { get; set;}
+
+        public virtual ICollection<HobbyUserEvent> HobbyUserEvents { get; set; }
     }
 }

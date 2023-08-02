@@ -34,6 +34,8 @@ namespace HobbyHub.Data
 
         public DbSet<HobbyUserHub> HobbyUserHubs { get; set; } = null!; 
 
+        public DbSet<HobbyUserEvent> HobbyUserEvents { get; set; } = null!; 
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -47,6 +49,7 @@ namespace HobbyHub.Data
             builder.ApplyConfiguration<HobbyUserHub>(new HobbyUserHubConfiguration());
             builder.ApplyConfiguration<Question>(new QuestionConfiguration());
             builder.ApplyConfiguration<HobbyUser>(new HobbyUserConfiguration());
+            builder.ApplyConfiguration<HobbyUserEvent>(new HobbyUserEventConfiguration());
         }
         
     }

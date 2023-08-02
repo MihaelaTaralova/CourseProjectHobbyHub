@@ -11,7 +11,7 @@ namespace HobbyBubSystem.Data.Models
         public Event()
         {
             this.CreatorId = Guid.NewGuid();
-            this.HobbyUsers = new List<HobbyUser>();
+            this.HobbyUsers = new List<HobbyUserEvent>();
         }
 
         [Comment("unique identifier")]
@@ -53,6 +53,6 @@ namespace HobbyBubSystem.Data.Models
         public bool IsActive { get; set; } = true;
 
         [Comment("people who will attend the event")]
-        public virtual ICollection<HobbyUser> HobbyUsers { get; set; }
+        public virtual ICollection<HobbyUserEvent> HobbyUsers { get; set; }
     }
 }
