@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HobbyHubSystem.Web.ViewModels.Event
+﻿namespace HobbyHubSystem.Web.ViewModels.Event
 {
     public class AllEventsViewModel
     {
+        public AllEventsViewModel()
+        {
+            this.Events = new List<EventIntroViewModel>();
+        }
+        public int HubId { get; set; }
+
+        public List<EventIntroViewModel> Events { get; set; }
     }
 }

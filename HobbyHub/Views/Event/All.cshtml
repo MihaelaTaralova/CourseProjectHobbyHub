@@ -1,0 +1,57 @@
+﻿@using HobbyHubSystem.Common
+@model HobbyHubSystem.Web.ViewModels.Event.AllEventsViewModel
+
+@{
+    ViewData["Title"] = "All Events";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (User.IsInRole(RoleConstants.Administrator) || User.IsInRole(RoleConstants.Moderator))
+{
+    <div class="add-event-button-container">
+        <a href="@Url.Action("AddEvent", "Event")" class="btn btn-success">Add Event</a>
+    </div>
+}
+
+<div id="events-list-container">
+    @if (Model.Events.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Location</th>
+                    <th>View Event</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var @theEvent in Model.Events)
+                {
+                    <tr>
+                        <td>@theEvent.Title</td>
+                        <td>@theEvent.DateOfEvent.ToShortDateString()</td>
+                        <td>@theEvent.Location</td>
+                        <td>
+                            <a href="@Url.Action("ViewEvent", "Event", new { id = @theEvent.Id })" class="btn btn-primary">View Event</a>
+                        </td>
+                    </tr>
+            }
+        </tbody>
+    </table>
+    }
+    else
+{
+    <p>No events found.</p>
+}
+</div>
+
+@section Styles {
+    <!-- Add your CSS styles here if needed -->
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <!-- Add your scripts here if needed -->
+}
