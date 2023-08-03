@@ -56,11 +56,6 @@ namespace HobbyHub.Controllers
         [HttpPost]
         public async Task<IActionResult> AddHobby(AddHobbyViewModel hobbyViewModel)
         {
-            //if (!(User.IsInRole("Administrator") || User.IsInRole("Moderator")))
-            //{
-            //    return Forbid();
-            //}
-
             var isAppoved = User.IsInRole("Administrator") || User.IsInRole("Moderator");
 
             if (ModelState.IsValid)

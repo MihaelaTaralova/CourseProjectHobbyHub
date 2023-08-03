@@ -36,7 +36,7 @@ namespace HobbyHub.Web.Services.Services
         {
             var eventForDelete = await dbContext.Events.FindAsync(Id);
 
-            if (eventForDelete != null)
+            if (eventForDelete == null)
             {
                 throw new ArgumentException("Article not found");
             }
@@ -49,7 +49,8 @@ namespace HobbyHub.Web.Services.Services
         public async Task EditEvent(int Id, EditEventViewModel model)
         {
             var editEvent = await dbContext.Events.FindAsync(Id);
-            if (editEvent != null)
+
+            if (editEvent == null)
             {
                 throw new ArgumentException("Event not found");
             }
