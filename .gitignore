@@ -392,6 +392,9 @@ FodyWeavers.xsd
 *.msi
 *.msix
 *.msm
+
+images/
+
 *.msp
 
 # JetBrains Rider
