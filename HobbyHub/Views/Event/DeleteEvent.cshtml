@@ -1,0 +1,18 @@
+﻿@model HobbyHubSystem.Web.ViewModels.Event.DeleteEventViewModel
+
+@{
+    ViewData["Title"] = "Delete Event";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>Are you sure you want to delete the event with title: <strong>@Model.Title</strong>?</p>
+
+<form asp-action="DeleteEventConfirmed" asp-route-id="@Model.Id" method="post">
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="All" asp-controller="Event" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

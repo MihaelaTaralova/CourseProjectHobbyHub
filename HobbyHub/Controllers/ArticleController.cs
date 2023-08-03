@@ -1,6 +1,8 @@
 ﻿using HobbyHub.Web.Services.Interfaces;
 using HobbyHubSystem.Web.ViewModels.Article;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using System.Security.Claims;
 
 namespace HobbyHub.Controllers
@@ -52,10 +54,6 @@ namespace HobbyHub.Controllers
         [HttpPost]
         public async Task<IActionResult> AddArticle(AddArticleViewModel articleViewModel)
         {
-            //if (!(User.IsInRole("Administrator") || User.IsInRole("Moderator")))
-            //{
-            //    return Forbid();
-            //}
             var isAppoved = User.IsInRole("Administrator") || User.IsInRole("Moderator");
 
             if (ModelState.IsValid)
@@ -81,6 +79,7 @@ namespace HobbyHub.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> DeleteArticle(int id)
         {
             var article = await articleService.GetArticleByIdAsync(id);
@@ -105,6 +104,7 @@ namespace HobbyHub.Controllers
         }
 
         [HttpPost, ActionName("DeleteArticle")]
+        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> DeleteArticleConfirmed(int id)
         {
             try
@@ -119,6 +119,7 @@ namespace HobbyHub.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> EditArticle(int id)
         {
             var article = await articleService.GetArticleByIdAsync(id);
@@ -143,6 +144,7 @@ namespace HobbyHub.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator,Moderator")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditArticle(int id, EditArticleViewModel model)
         {

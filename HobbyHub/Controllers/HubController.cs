@@ -1,9 +1,6 @@
 ﻿using HobbyHub.Web.Services.Interfaces;
-using HobbyHub.Web.Services.Services;
-using HobbyHubSystem.Web.ViewModels.Category;
 using HobbyHubSystem.Web.ViewModels.Hub;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace HobbyHub.Controllers

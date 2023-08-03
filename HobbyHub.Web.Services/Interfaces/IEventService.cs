@@ -10,7 +10,9 @@ namespace HobbyHub.Web.Services.Interfaces
 
         Task<Event> GetEventByIdAsync(int Id);
 
-        Task AddEventAsync(AddEventViewModel eventViewModel);
+        Task<EventViewModel> GetEventAsync(int id);
+
+        Task AddEventAsync(AddEventViewModel eventViewModel, Guid CreatorId);
 
         Task EditEvent(int Id, EditEventViewModel model);
 

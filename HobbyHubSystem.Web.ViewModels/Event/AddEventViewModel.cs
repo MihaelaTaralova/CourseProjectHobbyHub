@@ -6,6 +6,7 @@ namespace HobbyHubSystem.Web.ViewModels.Event
 {
     public class AddEventViewModel
     {
+        [Key]
         public int Id { get; set; }
 
         [Required]
@@ -25,7 +26,6 @@ namespace HobbyHubSystem.Web.ViewModels.Event
         [StringLength(LocationMax), MinLength(LocationMin)]
         public string Location { get; set; } = null!;
 
-        [ForeignKey(nameof(Hub))]
         public int HubId { get; set; }
     }
 }

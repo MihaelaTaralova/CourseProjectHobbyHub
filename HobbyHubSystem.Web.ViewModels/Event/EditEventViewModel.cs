@@ -7,6 +7,8 @@ namespace HobbyHubSystem.Web.ViewModels.Event
 {
     public class EditEventViewModel
     {
+        public int Id { get; set; }
+
         [Required]
         [StringLength(TitleMax), MinLength(TileMin)]
         public string Title { get; set; } = null!;

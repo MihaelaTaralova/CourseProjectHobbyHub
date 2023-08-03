@@ -1,6 +1,7 @@
 ﻿using HobbyBubSystem.Data.Models;
 using HobbyHub.Data;
 using HobbyHub.Web.Services.Interfaces;
+using HobbyHubSystem.Web.ViewModels.Article;
 using HobbyHubSystem.Web.ViewModels.Event;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,13 +16,13 @@ namespace HobbyHub.Web.Services.Services
             this.dbContext = _dbContext;
         }
 
-        public async Task AddEventAsync(AddEventViewModel eventViewModel)
+        public async Task AddEventAsync(AddEventViewModel eventViewModel, Guid CreatorId)
         {
             var addEvent = new Event()
             {
                 Title = eventViewModel.Title,
                 Description = eventViewModel.Description,
-                CreatorId = eventViewModel.CreatorId,
+                CreatorId = CreatorId,
                 Location = eventViewModel.Location,
                 DateOfEvent = eventViewModel.DateOfEvent,
                 HubId = eventViewModel.HubId
@@ -108,6 +109,29 @@ namespace HobbyHub.Web.Services.Services
 
             dbContext.HobbyUserEvents.Add(eventParticipation);
             await dbContext.SaveChangesAsync();
+        }
+
+        public async Task<EventViewModel> GetEventAsync(int id)
+        {
+            var currentEvent = await dbContext.Events
+                .FirstOrDefaultAsync(a => a.Id == id);
+
+            if (currentEvent == null)
+            {
+                throw new ArgumentException("Event not found");
+            }
+
+            var viewModel = new EventViewModel
+            {
+                Id = currentEvent.Id,
+                Title = currentEvent.Title,
+                Description = currentEvent.Description,
+                DateOfEvent = currentEvent.DateOfEvent,
+                Location = currentEvent.Location
+
+            };
+
+            return viewModel;
         }
     }
 }

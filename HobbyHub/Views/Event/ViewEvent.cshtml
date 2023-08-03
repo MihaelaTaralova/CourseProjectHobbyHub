@@ -1,0 +1,34 @@
+﻿@using HobbyHubSystem.Common;
+@model HobbyHubSystem.Web.ViewModels.Event.EventViewModel
+
+@{
+    ViewData["Title"] = "View Event";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="event-details">
+    <p><strong>Title:</strong> @Model.Title</p>
+    <p><strong>Date:</strong> @Model.DateOfEvent</p>
+    <p><strong>Location:</strong> @Model.Location</p>
+    <p><strong>Description:</strong> @Model.Description</p>
+</div>
+
+@if (User.IsInRole(RoleConstants.Administrator) || User.IsInRole(RoleConstants.Moderator))
+{
+    <div class="event-action-buttons">
+        <a href="@Url.Action("EditEvent", "Event", new { id = Model.Id })" class="btn btn-success">Edit Event</a>
+        <a href="@Url.Action("DeleteEvent", "Event", new { id = Model.Id })" class="btn btn-danger">Delete Event</a>
+    </div>
+}
+
+<div class="back-button-container">
+    <a href="@Url.Action("All", "Event", new { hubId = Model.HubId })" class="btn btn-primary">Back to All Events</a>
+</div>
+
+@section Styles {
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

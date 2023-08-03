@@ -8,10 +8,8 @@
 <h2>@ViewData["Title"]</h2>
 
 @if (User.IsInRole(RoleConstants.Administrator) || User.IsInRole(RoleConstants.Moderator))
-{
-    <div class="add-event-button-container">
-        <a href="@Url.Action("AddEvent", "Event")" class="btn btn-success">Add Event</a>
-    </div>
+{   
+        <a class="btn btn-primary" asp-controller="Event" asp-action="AddEvent" asp-route-id="@Model.HubId">Add Event</a>
 }
 
 <div id="events-list-container">
@@ -48,10 +46,10 @@
 </div>
 
 @section Styles {
-    <!-- Add your CSS styles here if needed -->
+   
 }
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <!-- Add your scripts here if needed -->
+   
 }

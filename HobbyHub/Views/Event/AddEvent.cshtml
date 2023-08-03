@@ -1,0 +1,35 @@
+﻿@model HobbyHubSystem.Web.ViewModels.Event.AddEventViewModel
+
+@{
+    ViewData["Title"] = "Add Event";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-controller="Event" asp-action="AddEvent" method="post">
+    <input type="hidden" asp-for="HubId" />
+    <div class="form-group">
+        <label for="Title">Title:</label>
+        <input type="text" id="Title" name="Title" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="Description">Description:</label>
+        <textarea id="Description" name="Description" class="form-control" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="DateOfEvent">Date of Event:</label>
+        <input type="datetime-local" id="DateOfEvent" name="DateOfEvent" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="Location">Location:</label>
+        <input type="text" id="Location" name="Location" class="form-control" required>
+    </div>
+   
+    <input type="hidden" asp-for="HubId" value="@Model.HubId" />
+
+    <button type="submit" class="btn btn-primary">Add Event</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

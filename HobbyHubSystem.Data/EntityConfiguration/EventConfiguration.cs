@@ -19,6 +19,11 @@ namespace HobbyHubSystem.Data.EntityConfiguration
                 .WithMany(c => c.Events)
                 .HasForeignKey(q => q.CreatorId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(h => h.Hub)
+              .WithMany(h => h.Events)
+              .HasForeignKey(q => q.HubId)
+              .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

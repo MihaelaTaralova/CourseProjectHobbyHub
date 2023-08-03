@@ -1,10 +1,7 @@
 ﻿using HobbyBubSystem.Data.Models;
-using HobbyBubSystem.Data.Models.Account;
 using HobbyHub.Data;
 using HobbyHub.Web.Services.Interfaces;
-using HobbyHubSystem.Common;
 using HobbyHubSystem.Web.ViewModels.Article;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace HobbyHub.Web.Services.Services
