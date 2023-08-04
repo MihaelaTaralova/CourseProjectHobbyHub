@@ -2,8 +2,6 @@
 using HobbyHub.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using HobbyHubSystem.Web.ViewModels.Account;
-using Microsoft.EntityFrameworkCore;
-using HobbyHub.Data;
 
 namespace HobbyHub.Web.Services.Services
 {

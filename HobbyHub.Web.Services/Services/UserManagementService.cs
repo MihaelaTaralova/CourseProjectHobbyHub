@@ -28,11 +28,11 @@ namespace HobbyHub.Web.Services.Services
             string email1 = "mihaela@abv.bg";
             string email2 = "sami@abv.bg";
 
-            var user = await userManager.FindByEmailAsync(email1);
-            var user1 = await userManager.FindByEmailAsync(email2);
+            var user1 = await userManager.FindByEmailAsync(email1);
+            var user2 = await userManager.FindByEmailAsync(email2);
 
-            await userManager.AddToRolesAsync(user, new string[] { RoleConstants.Administrator, RoleConstants.Moderator });
-            await userManager.AddToRoleAsync(user1, RoleConstants.Moderator);
+            await userManager.AddToRolesAsync(user1, new string[] { RoleConstants.Administrator, RoleConstants.Moderator });
+            await userManager.AddToRoleAsync(user2, RoleConstants.Moderator);
         }
     }
 }

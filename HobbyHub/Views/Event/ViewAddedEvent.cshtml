@@ -1,0 +1,8 @@
+﻿@model HobbyHubSystem.Web.ViewModels.Event.EventViewModel
+
+<h2>@Model.Title</h2>
+<p>@Model.Description</p>
+<p>Date: @Model.DateOfEvent</p>
+<p>Location: @Model.Location</p>
+
+<a asp-controller="Event" asp-action="All" asp-route-id="@Model.HubId">Back to All Events</a>

@@ -17,7 +17,7 @@ namespace HobbyHub.Controllers
         }
         public async Task<IActionResult> All(int hubId)
         {
-            var allArticles = await articleService.GetAllArticlesAsync();
+            var allArticles = await articleService.GetAllArticlesAsync(hubId);
             var articles = allArticles.Where(a => a.IsActive == true).ToList();
 
             var articleViewModel = articles.Select(a => new ArticleIntroViewModel

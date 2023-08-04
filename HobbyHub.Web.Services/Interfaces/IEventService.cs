@@ -6,7 +6,7 @@ namespace HobbyHub.Web.Services.Interfaces
 {
     public interface IEventService
     {
-        Task<List<Event>> GetAllEventsAsync();
+        Task<List<Event>> GetAllEventsAsync(int hubId);
 
         Task<Event> GetEventByIdAsync(int Id);
 
@@ -22,7 +22,9 @@ namespace HobbyHub.Web.Services.Interfaces
 
         Task JoinEventAsync(int eventId, Guid userId);
 
-       Task<bool> IsUserJoinedEvent(int eventId, Guid userId);
+        Task<bool> IsUserJoinedEvent(int eventId, Guid userId);
+
+        EventViewModel ConvertEventModelToViewModel(Event eventModel);
 
     }
 }

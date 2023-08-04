@@ -22,9 +22,10 @@
     </div>
 }
 
-<div class="back-button-container">
-    <a href="@Url.Action("All", "Event", new { hubId = Model.HubId })" class="btn btn-primary">Back to All Events</a>
+<div class="back-to-all-events">
+    <a asp-controller="Event" asp-action="All">Back to All Events</a>
 </div>
+
 
 @section Styles {
 }

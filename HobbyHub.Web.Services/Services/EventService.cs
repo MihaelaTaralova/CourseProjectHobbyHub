@@ -64,9 +64,9 @@ namespace HobbyHub.Web.Services.Services
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task<List<Event>> GetAllEventsAsync()
+        public async Task<List<Event>> GetAllEventsAsync(int hubId)
         {
-            return await dbContext.Events.ToListAsync();
+            return await dbContext.Events.Where(a => a.HubId == hubId && a.IsActive == true).ToListAsync();
         }
 
         public async Task<Event> GetEventByIdAsync(int Id)
@@ -134,5 +134,17 @@ namespace HobbyHub.Web.Services.Services
 
             return viewModel;
         }
+        public EventViewModel ConvertEventModelToViewModel(Event eventModel)
+        {
+            return new EventViewModel
+            {
+                Id = eventModel.Id,
+                Title = eventModel.Title,
+                Description = eventModel.Description,
+                DateOfEvent = eventModel.DateOfEvent,
+                Location = eventModel.Location
+            };
+        }
+
     }
 }

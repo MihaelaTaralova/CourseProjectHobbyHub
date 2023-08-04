@@ -6,7 +6,7 @@ namespace HobbyHub.Web.Services.Interfaces
 {
     public interface IArticleService
     {
-        Task<List<Article>> GetAllArticlesAsync();
+        Task<List<Article>> GetAllArticlesAsync(int hubId);
 
         Task<Article> GetArticleByIdAsync(int Id);
 

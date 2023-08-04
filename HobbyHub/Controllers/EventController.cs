@@ -1,6 +1,4 @@
 ﻿using HobbyHub.Web.Services.Interfaces;
-using HobbyHub.Web.Services.Services;
-using HobbyHubSystem.Web.ViewModels.Article;
 using HobbyHubSystem.Web.ViewModels.Event;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,17 +18,16 @@ namespace HobbyHub.Controllers
 
         public async Task<IActionResult> All(int hubId)
         {
-            var allEvents = await eventService.GetAllEventsAsync();
-            var activeEvents = allEvents.Where(e => e.IsActive == true).ToList();
+            var allEvents = await eventService.GetAllEventsAsync(hubId);
+            //var activeEvents = allEvents.Where(e => e.IsActive == true).ToList();
 
-            var eventViewModel = activeEvents.Select(e => new EventIntroViewModel
+            var eventViewModel = allEvents.Select(e => new EventIntroViewModel
             {
                 Id = e.Id,
                 Title = e.Title,
                 DateOfEvent = e.DateOfEvent,
                 Location = e.Location,
-                HubId = e.HubId,
-                IsActive = e.IsActive
+                HubId = e.HubId
             }).ToList();
 
             var viewModel = new AllEventsViewModel
@@ -78,7 +75,9 @@ namespace HobbyHub.Controllers
             if (ModelState.IsValid)
             {
                 await eventService.AddEventAsync(eventViewModel, new Guid(User.FindFirst(ClaimTypes.NameIdentifier).Value));
-                return RedirectToAction("All");
+                var addedEvent = await eventService.GetEventByNameAsync(eventViewModel.Title);
+                var addedEventViewModel = eventService.ConvertEventModelToViewModel(addedEvent); // Конвертиране на модела към ViewModel
+                return View("ViewAddedEvent", addedEventViewModel);
             }
 
             return View(eventViewModel);

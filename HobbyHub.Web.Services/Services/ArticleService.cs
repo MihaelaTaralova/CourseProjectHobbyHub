@@ -74,12 +74,7 @@ namespace HobbyHub.Web.Services.Services
             dbContext.Articles.Update(article);
             await dbContext.SaveChangesAsync();
         }
-
-        public async Task<List<Article>> GetAllArticlesAsync()
-        {
-            return await dbContext.Articles.Include(a => a.Author).ToListAsync();
-        }
-
+               
         public async Task<Article> GetArticleByNameAsync(string title)
         {
             return await dbContext.Articles.FirstOrDefaultAsync(a => a.Title == title);
@@ -88,6 +83,11 @@ namespace HobbyHub.Web.Services.Services
         public async Task<Article> GetArticleByIdAsync(int Id)
         {
             return await dbContext.Articles.FindAsync(Id);
+        }
+
+        public async Task<List<Article>> GetAllArticlesAsync(int hubId)
+        {
+            return await dbContext.Articles.Include(a => a.Author).Where(a => a.HubId == hubId && a.IsApproved).ToListAsync();
         }
 
         public async Task<ArticleViewModel> GetArticleWithAuthorAsync(int articleId)

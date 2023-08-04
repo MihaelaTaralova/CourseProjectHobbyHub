@@ -5,7 +5,6 @@ using HobbyHubSystem.Data.EntityConfiguration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Xml.Linq;
 
 namespace HobbyHub.Data
 {
