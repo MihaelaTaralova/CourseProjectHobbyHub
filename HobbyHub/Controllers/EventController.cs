@@ -76,7 +76,7 @@ namespace HobbyHub.Controllers
             {
                 await eventService.AddEventAsync(eventViewModel, new Guid(User.FindFirst(ClaimTypes.NameIdentifier).Value));
                 var addedEvent = await eventService.GetEventByNameAsync(eventViewModel.Title);
-                var addedEventViewModel = eventService.ConvertEventModelToViewModel(addedEvent); // Конвертиране на модела към ViewModel
+                var addedEventViewModel = eventService.ConvertEventModelToViewModel(addedEvent); 
                 return View("ViewAddedEvent", addedEventViewModel);
             }
 

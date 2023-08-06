@@ -134,6 +134,7 @@ namespace HobbyHub.Web.Services.Services
 
             return viewModel;
         }
+
         public EventViewModel ConvertEventModelToViewModel(Event eventModel)
         {
             return new EventViewModel
