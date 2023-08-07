@@ -38,7 +38,7 @@ namespace HobbyHub.Web.Services.Services
 
             if (eventForDelete == null)
             {
-                throw new ArgumentException("Article not found");
+                throw new ArgumentException("Event not found");
             }
 
             eventForDelete.IsActive = false;
@@ -90,7 +90,7 @@ namespace HobbyHub.Web.Services.Services
         {
             var eventToJoin = await dbContext.Events.FindAsync(Id);
 
-            if (eventToJoin != null)
+            if (eventToJoin == null)
             {
                 throw new ArgumentException("Event not found");
             }

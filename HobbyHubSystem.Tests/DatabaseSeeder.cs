@@ -1,4 +1,5 @@
 ﻿using HobbyBubSystem.Data.Models;
+using HobbyBubSystem.Data.Models.Account;
 using HobbyHub.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,11 @@ namespace HobbyHubSystem.Tests
     {
         private static Hobby hobby;
         private static Category category;
+        private static Event testEvent;
+        private static Hub hub;
+
+        private static int eventId = 14;
+        private static int hubId = 20;
 
         public static void SeedDatabase(HobbyHubDbContext dbContext)
         {
@@ -61,7 +67,38 @@ namespace HobbyHubSystem.Tests
             dbContext.Categories.Add(category);
 
             dbContext.SaveChanges();
+
+
+            //Seed events
+            testEvent = new Event()
+            {
+                Id = eventId,
+                Title = "Sample Event",
+                Description = "Description for the event",
+                CreatorId = Guid.NewGuid(),
+                Location = "Sample Location",
+                DateOfEvent = DateTime.UtcNow.AddDays(7),
+                HubId = hubId
+            };
+
+            dbContext.Events.Add(testEvent);
+
+            dbContext.SaveChanges();
+
+
+            //Seed hub
+            hub = new Hub()
+            {
+                Id = hubId,
+                Name = "Test hub",
+                About = "About to test hub",
+                CreatorId = Guid.NewGuid(),
+                HobbyId = hobby.Id               
+            };
+            dbContext.Hubs.Add(hub);
+            dbContext.SaveChanges();
         }
     }
-}
+    }
+
 
