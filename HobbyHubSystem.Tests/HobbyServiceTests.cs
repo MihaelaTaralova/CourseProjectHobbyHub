@@ -140,7 +140,7 @@ public class HobbyServiceTests
     public async Task EditHobbyAsync_WithExistingHobby_ShouldUpdateHobbyDetails()
     {
         // Arrange
-        var hobby = dbContext.Hobbies.First(); // Assuming there's at least one hobby in the database
+        var hobby = dbContext.Hobbies.First(); 
         var hobbyId = hobby.Id;
 
         var newHobbyName = "New Hobby Name";

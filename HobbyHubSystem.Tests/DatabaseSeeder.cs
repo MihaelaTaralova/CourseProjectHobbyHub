@@ -11,6 +11,8 @@ namespace HobbyHubSystem.Tests
         private static Category category;
         private static Event testEvent;
         private static Hub hub;
+        private static Article article;
+        private static HobbyUser user;
 
         private static int eventId = 14;
         private static int hubId = 20;
@@ -93,11 +95,40 @@ namespace HobbyHubSystem.Tests
                 Name = "Test hub",
                 About = "About to test hub",
                 CreatorId = Guid.NewGuid(),
-                HobbyId = hobby.Id               
+                HobbyId = hobby.Id
             };
             dbContext.Hubs.Add(hub);
             dbContext.SaveChanges();
-        }
+
+
+            //Seed article
+            article = new Article()
+            {
+                Id = 20,
+                Title = "Sample article",
+                Content = "Content of the article",
+                AuthorId = Guid.NewGuid(),
+                IsApproved = true,
+                IsActive = true,
+                PublishDate = DateTime.UtcNow,
+                HubId = hubId
+            };
+            dbContext.Articles.Add(article);
+            dbContext.SaveChanges();
+
+            //Seed user
+            user = new HobbyUser()
+            {
+                FirstName = "Test",
+                LastName = "Testov",
+                Gender = "male",
+                RegisteredOn = DateTime.UtcNow,
+                ImageUrl = "image3.jpg"
+            };
+
+            dbContext.Users.Add(user);
+            dbContext.SaveChanges();
+    }
     }
     }
 
