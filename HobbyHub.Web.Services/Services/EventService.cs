@@ -128,7 +128,8 @@ namespace HobbyHub.Web.Services.Services
                 Title = currentEvent.Title,
                 Description = currentEvent.Description,
                 DateOfEvent = currentEvent.DateOfEvent,
-                Location = currentEvent.Location
+                Location = currentEvent.Location,
+                HubId = currentEvent.HubId,
 
             };
 

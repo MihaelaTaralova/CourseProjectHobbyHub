@@ -1,12 +1,14 @@
 ﻿using HobbyHub.Data;
 using HobbyHub.Web.Services.Interfaces;
 using HobbyHubSystem.Web.ViewModels.Hobby;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace HobbyHub.Controllers
 {
+    [Authorize]
     public class HobbyController : Controller
     {
         private readonly HobbyHubDbContext dbContext;
@@ -24,6 +26,7 @@ namespace HobbyHub.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> All()
         {
             var hobbies = await hobbyService.GetAllHobbiesAsync();
@@ -46,6 +49,11 @@ namespace HobbyHub.Controllers
         [HttpGet]
         public IActionResult AddHobby(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
             AddHobbyViewModel model = new()
             {
                 CategoryId = id
@@ -70,6 +78,11 @@ namespace HobbyHub.Controllers
         [HttpGet]
         public async Task<IActionResult> EditHobby(int Id)
         {
+            if (Id <= 0)
+            {
+                return BadRequest();
+            }
+
             var hobby = await hobbyService.GetHobbyByIdAsync(Id);
 
             if (hobby == null)
@@ -97,6 +110,11 @@ namespace HobbyHub.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditHobby(int Id, EditHobbyViewModel model)
         {
+            if (Id <= 0)
+            {
+                return BadRequest();
+            }
+
             if (ModelState.IsValid)
             {
                 try
@@ -116,6 +134,11 @@ namespace HobbyHub.Controllers
         [HttpGet]
         public async Task<IActionResult> DeleteHobby(int Id)
         {
+            if (Id <= 0)
+            {
+                return BadRequest();
+            }
+
             var hobby = await hobbyService.GetHobbyByIdAsync(Id);
 
             if (hobby == null)
@@ -141,6 +164,11 @@ namespace HobbyHub.Controllers
         [HttpPost, ActionName("DeleteHobby")]
         public async Task<IActionResult> DeleteHobbyConfirmed(int Id)
         {
+            if (Id <= 0)
+            {
+                return BadRequest();
+            }
+
             try
             {
                 await hobbyService.DeleteHobbyAsync(Id);
@@ -155,13 +183,16 @@ namespace HobbyHub.Controllers
         [HttpGet]
         public async Task<IActionResult> OpenHobby(int Id)
         {
+            if (Id <= 0)
+            {
+                return BadRequest();
+            }
+
             var hobby = await dbContext.Hobbies.FindAsync(Id);
             if (hobby == null)
             {
                 return NotFound();
             }
-
-            //var hub = await dbContext.Hubs.FirstOrDefaultAsync(h => h.HobbyId == Id);
 
             var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 

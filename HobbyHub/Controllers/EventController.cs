@@ -18,6 +18,11 @@ namespace HobbyHub.Controllers
 
         public async Task<IActionResult> All(int hubId)
         {
+            if (hubId <= 0)
+            {
+                return BadRequest();
+            }
+
             var allEvents = await eventService.GetAllEventsAsync(hubId);
             //var activeEvents = allEvents.Where(e => e.IsActive == true).ToList();
 
@@ -42,6 +47,11 @@ namespace HobbyHub.Controllers
         [HttpGet]
         public async Task<IActionResult> ViewEvent(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
             var eventViewModel = await eventService.GetEventAsync(id);
 
             if (eventViewModel == null)
@@ -55,6 +65,11 @@ namespace HobbyHub.Controllers
         [Authorize(Roles = "Administrator,Moderator")]
         public IActionResult AddEvent(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
             AddEventViewModel model = new()
             {
                 HubId = id
@@ -87,6 +102,11 @@ namespace HobbyHub.Controllers
         [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> DeleteEvent(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
             var currentEvent = await eventService.GetEventByIdAsync(id);
 
             if (currentEvent == null)
@@ -102,7 +122,8 @@ namespace HobbyHub.Controllers
             var eventModel = new DeleteEventViewModel
             {
                 Id = currentEvent.Id,
-                Title = currentEvent.Title
+                Title = currentEvent.Title,
+                HubId = currentEvent.HubId,
             };
 
             return View(eventModel);
@@ -112,6 +133,11 @@ namespace HobbyHub.Controllers
         [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> DeleteEventConfirmed(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
             try
             {
                 await eventService.DeleteEvent(id);
@@ -127,6 +153,11 @@ namespace HobbyHub.Controllers
         [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> EditEvent(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
             var currentEvent = await eventService.GetEventByIdAsync(id);
             if (currentEvent == null)
             {
@@ -155,6 +186,11 @@ namespace HobbyHub.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditEvent(int id, EditEventViewModel model)
         {
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
             if (ModelState.IsValid)
             {
                 try

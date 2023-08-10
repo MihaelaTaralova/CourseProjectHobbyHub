@@ -20,6 +20,11 @@ namespace HobbyHub.Controllers
         [HttpGet]
         public async Task<IActionResult> GetMembers(int hubId)
         {
+            if (hubId <= 0)
+            {
+                return BadRequest();
+            }
+
             var members = await memberService.GetHubMembers(hubId);
 
             var viewModel = new AllMembersViewModel()

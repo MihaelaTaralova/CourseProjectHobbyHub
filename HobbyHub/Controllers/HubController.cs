@@ -53,6 +53,11 @@ namespace HobbyHub.Controllers
         [HttpGet]
         public async Task<IActionResult> WelcomeHub(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
             var hub = await hubService.GetHubByIdAsync(id);
 
             if (hub == null)

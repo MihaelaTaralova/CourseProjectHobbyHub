@@ -15,8 +15,22 @@ namespace HobbyHub.Controllers
         {
             this.articleService = _articleService;
         }
-        public async Task<IActionResult> All(int hubId)
+        public async Task<IActionResult> All(int hubId, int articleId) 
         {
+            if (hubId <= 0 && articleId <= 0)
+            {
+                return BadRequest();
+            }
+
+            if (articleId > 0)
+            {
+                var getArticle = await articleService.GetArticleByIdAsync(articleId);
+                if (getArticle == null)
+                {
+                    return BadRequest(); 
+                }
+                hubId = getArticle.HubId;
+            }
             var allArticles = await articleService.GetAllArticlesAsync(hubId);
             var articles = allArticles.Where(a => a.IsActive == true).ToList();
 
@@ -42,6 +56,11 @@ namespace HobbyHub.Controllers
         [HttpGet]
         public IActionResult AddArticle(int id)
         {
+            if (id <= 0 || !ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             AddArticleViewModel model = new()
             {
                 HubId = id,
@@ -68,6 +87,11 @@ namespace HobbyHub.Controllers
         [HttpGet]
         public async Task<IActionResult> ViewArticle(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
             var articleViewModel = await articleService.GetArticleWithAuthorAsync(id);
 
             if (articleViewModel == null)
@@ -75,13 +99,18 @@ namespace HobbyHub.Controllers
                 return NotFound();
             }
 
-            return View(articleViewModel);
+            return View("ViewArticle", articleViewModel);
         }
 
         [HttpGet]
         [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> DeleteArticle(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
             var article = await articleService.GetArticleByIdAsync(id);
 
             if (article == null)
@@ -122,6 +151,11 @@ namespace HobbyHub.Controllers
         [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> EditArticle(int id)
         {
+            if (id <=0)
+            {
+                return BadRequest();
+            }
+
             var article = await articleService.GetArticleByIdAsync(id);
             if (article == null)
             {
@@ -148,6 +182,11 @@ namespace HobbyHub.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditArticle(int id, EditArticleViewModel model)
         {
+            if (id <=0) 
+            {
+                return BadRequest();
+            }
+
             if (ModelState.IsValid)
             {
                 try

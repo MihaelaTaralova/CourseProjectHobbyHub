@@ -12,7 +12,7 @@
     <input type="hidden" asp-for="Id" />
 
     <button type="submit" class="btn btn-danger">Delete</button>
-    <a asp-action="All" asp-controller="Event" class="btn btn-secondary">Cancel</a>
+    <a asp-action="All" asp-controller="Event" asp-route-hubId="@Model.HubId" class="btn btn-secondary">Cancel</a>
 </form>
 
 @section Scripts {

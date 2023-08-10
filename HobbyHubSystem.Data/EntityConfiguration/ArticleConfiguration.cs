@@ -1,4 +1,6 @@
 ﻿using HobbyBubSystem.Data.Models;
+using HobbyBubSystem.Data.Models.Account;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -6,7 +8,6 @@ namespace HobbyHubSystem.Data.EntityConfiguration
 {
     internal class ArticleConfiguration : IEntityTypeConfiguration<Article>
     {
-
         public void Configure(EntityTypeBuilder<Article> builder)
         {
             builder
@@ -21,6 +22,8 @@ namespace HobbyHubSystem.Data.EntityConfiguration
                 .WithMany(h => h.Articles)
                 .HasForeignKey(q => q.HubId)
                 .OnDelete(DeleteBehavior.Restrict);
+                      
         }
+             
     }
 }

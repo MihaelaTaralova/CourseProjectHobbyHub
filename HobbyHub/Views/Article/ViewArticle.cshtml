@@ -9,16 +9,16 @@
 
 @if (User.IsInRole(RoleConstants.Administrator) || User.IsInRole(RoleConstants.Moderator))
 {
-    <div class="add-hobby-button-container">
+    <div class="add-article-button-container">
         <a asp-controller="Article" asp-action="EditArticle" asp-route-id="@Model.Id">Edit Article</a>
     </div>
-    <div class="add-hobby-button-container">
-        <a asp-controller="Article" asp-action="DeleteArticle" asp-route-id="@Model.Id">Delete Article</a>
+    <div class="add-article-button-container">
+        <a asp-controller="Article" asp-action="DeleteArticle" asp-route-Id="@Model.Id">Delete Article</a>
     </div>
 }
 
 <div class="back-to-all-articles">
-    <a asp-controller="Article" asp-action="All">Back to All Articles</a>
+    <a asp-controller="Article" asp-action="All" asp-route-hubId="@Model.HubId">Back to All Articles</a>
 </div>
 
 @section Scripts {

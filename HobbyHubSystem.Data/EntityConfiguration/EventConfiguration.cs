@@ -1,11 +1,8 @@
 ﻿using HobbyBubSystem.Data.Models;
+using HobbyBubSystem.Data.Models.Account;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HobbyHubSystem.Data.EntityConfiguration
 {
@@ -24,6 +21,9 @@ namespace HobbyHubSystem.Data.EntityConfiguration
               .WithMany(h => h.Events)
               .HasForeignKey(q => q.HubId)
               .OnDelete(DeleteBehavior.Restrict);
+
         }
+
     }
 }
+

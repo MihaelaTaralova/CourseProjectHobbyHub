@@ -1,4 +1,6 @@
 ﻿using HobbyBubSystem.Data.Models;
+using HobbyBubSystem.Data.Models.Account;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -6,6 +8,8 @@ namespace HobbyHubSystem.Data.EntityConfiguration
 {
     internal class HobbyConfiguration : IEntityTypeConfiguration<Hobby>
     {
+        private readonly UserManager<HobbyUser> _userManager;
+
         public void Configure(EntityTypeBuilder<Hobby> builder)
         {
             builder
@@ -23,26 +27,8 @@ namespace HobbyHubSystem.Data.EntityConfiguration
                 .WithOne(h => h.Hobby)
                 .OnDelete(DeleteBehavior.Restrict);
 
-
-            //builder.HasData(this.GenerateHobbies());
-
         }
 
-        //public Hobby[] GenerateHobbies() 
-        //{
-        //ICollection<Hobby> hobbies;
-
-        //    Hobby hobby;
-
-        //    hobby = new Hobby()
-        //    {
-
-        //    };
-
-        //    hobbies.Add(hobby);
-
-        //    return hobbies.ToArray();
-        //}
 
     }
 }

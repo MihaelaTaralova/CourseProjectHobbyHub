@@ -33,6 +33,7 @@ namespace HobbyHubSystem.Data.EntityConfiguration
                 ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/e/e1/Pilates_Moscow.jpg"
             };
 
+            categories.Add(category);
             return categories.ToArray();
         }
     }

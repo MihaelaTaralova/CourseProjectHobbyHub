@@ -2,10 +2,12 @@
 using HobbyHub.Web.Services.Services;
 using HobbyHubSystem.Web.ViewModels.Category;
 using HobbyHubSystem.Web.ViewModels.Hobby;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HobbyHub.Controllers
 {
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly ICategoryService categoryService;
@@ -19,6 +21,7 @@ namespace HobbyHub.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> All()
         {
             var categories = await categoryService.GetAllCategoriesAsync();
@@ -40,8 +43,14 @@ namespace HobbyHub.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> OpenCategory(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
             var category = await categoryService.GetCategoryByIdAsync(id);
 
             if (category == null)
@@ -103,6 +112,11 @@ namespace HobbyHub.Controllers
         [HttpGet]
         public async Task<IActionResult> EditCategory(int Id)
         {
+            if (Id <= 0)
+            {
+                return BadRequest();
+            }
+
             var category = await categoryService.GetCategoryByIdAsync(Id);
 
             if (category == null)
@@ -128,6 +142,10 @@ namespace HobbyHub.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditCategory(int Id, EditCategoryViewModel model)
         {
+            if (Id <= 0)
+            {
+                return BadRequest();
+            }
 
             if (ModelState.IsValid)
             {
@@ -148,6 +166,11 @@ namespace HobbyHub.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int Id)
         {
+            if (Id <= 0)
+            {
+                return BadRequest();
+            }
+
             var category = await categoryService.GetCategoryByIdAsync(Id);
             if (category == null)
             {
@@ -171,6 +194,11 @@ namespace HobbyHub.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int Id)
         {
+            if (Id <= 0)
+            {
+                return BadRequest();
+            }
+
             try
             {
                 await categoryService.DeleteCategory(Id);

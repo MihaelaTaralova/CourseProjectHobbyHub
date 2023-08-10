@@ -13,6 +13,8 @@ namespace HobbyHubSystem.Data.EntityConfiguration
                .HasOne(e => e.Hobby)
                .WithOne(e => e.Hub)
                .OnDelete(DeleteBehavior.Restrict);
+
         }
+
     }
-}
+    }

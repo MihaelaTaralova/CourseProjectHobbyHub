@@ -9,5 +9,7 @@
         public string Content { get; set; }
 
         public string AuthorName { get; set; }
+
+        public int HubId { get; set; }
     }
 }

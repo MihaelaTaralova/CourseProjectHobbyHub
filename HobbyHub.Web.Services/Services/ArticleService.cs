@@ -106,7 +106,8 @@ namespace HobbyHub.Web.Services.Services
                 Id = article.Id,
                 Title = article.Title,
                 Content = article.Content,
-                AuthorName = article.Author.UserName
+                AuthorName = article.Author.UserName,
+                HubId = article.HubId
             };
 
             return viewModel;

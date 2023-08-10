@@ -289,11 +289,10 @@ namespace HobbyHubSystem.Tests
                         PublishDate = DateTime.UtcNow
                     }
             };
-            mockPendingArticles = mockPendingArticles.OrderBy(a => a.Id).ToList();
 
             dbContext.Articles.AddRange(mockPendingArticles);
             await dbContext.SaveChangesAsync();
-
+                        
             // Act
             var pendingArticlesViewModel = await articleService.GetPendingArticlesAsync();
 

@@ -5,6 +5,7 @@ using HobbyHubSystem.Data.EntityConfiguration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace HobbyHub.Data
 {
@@ -39,16 +40,16 @@ namespace HobbyHub.Data
         {
             base.OnModelCreating(builder);
 
-            builder.ApplyConfiguration<Answer>(new AnswerConfiguration());
-            builder.ApplyConfiguration<Article>(new ArticleConfiguration());
-            //builder.ApplyConfiguration<Category>(new CategoryConfiguration());
-            builder.ApplyConfiguration<Event>(new EventConfiguration());
-            builder.ApplyConfiguration<Hub>(new HubConfiguration());
-            builder.ApplyConfiguration<Hobby>(new HobbyConfiguration());
-            builder.ApplyConfiguration<HobbyUserHub>(new HobbyUserHubConfiguration());
-            builder.ApplyConfiguration<Question>(new QuestionConfiguration());
             builder.ApplyConfiguration<HobbyUser>(new HobbyUserConfiguration());
+            //builder.ApplyConfiguration<Category>(new CategoryConfiguration());
+            builder.ApplyConfiguration<Hobby>(new HobbyConfiguration());
+            builder.ApplyConfiguration<Hub>(new HubConfiguration());
+            builder.ApplyConfiguration<HobbyUserHub>(new HobbyUserHubConfiguration());
             builder.ApplyConfiguration<HobbyUserEvent>(new HobbyUserEventConfiguration());
+            builder.ApplyConfiguration<Article>(new ArticleConfiguration());
+            builder.ApplyConfiguration<Event>(new EventConfiguration());
+            builder.ApplyConfiguration<Question>(new QuestionConfiguration());
+            builder.ApplyConfiguration<Answer>(new AnswerConfiguration());
         }
         
     }

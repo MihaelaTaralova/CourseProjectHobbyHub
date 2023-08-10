@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HobbyHub.Web.Services", "Ho
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E5965295-BD49-4BCB-917A-982B33113872}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HobbyHubSystem.Tests", "HobbyHubSystem.Tests\HobbyHubSystem.Tests.csproj", "{EFD7BD4A-97B0-486C-85FB-68E9E3B34DA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HobbyHubSystem.Tests", "HobbyHubSystem.Tests\HobbyHubSystem.Tests.csproj", "{EFD7BD4A-97B0-486C-85FB-68E9E3B34DA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
