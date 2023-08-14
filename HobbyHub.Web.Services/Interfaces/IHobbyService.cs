@@ -1,6 +1,7 @@
 ﻿using HobbyBubSystem.Data.Models;
 using HobbyHubSystem.Web.ViewModels.Admin;
 using HobbyHubSystem.Web.ViewModels.Hobby;
+using Microsoft.AspNetCore.Http;
 
 namespace HobbyHub.Web.Services.Interfaces
 {
@@ -14,7 +15,7 @@ namespace HobbyHub.Web.Services.Interfaces
 
         Task AddHobbyAsync(AddHobbyViewModel hobbyViewModel, Guid userId, bool isApproved = false);
 
-        Task EditHobbyAsync(int categoryId, EditHobbyViewModel model);
+        Task EditHobbyAsync(int categoryId, EditHobbyViewModel model, IFormFile formFile);
 
         Task DeleteHobbyAsync(int categoryId);
 

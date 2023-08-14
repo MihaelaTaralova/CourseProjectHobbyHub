@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using HobbyHub.Web.Services.Interfaces;
 using HobbyHubSystem.Web.ViewModels.Admin;
 using HobbyHubSystem.Web.ViewModels.Hobby;
+using Microsoft.AspNetCore.Http;
 
 namespace HobbyHub.Web.Services.Services
 {
@@ -36,7 +37,7 @@ namespace HobbyHub.Web.Services.Services
             };
 
             var a = await dbContext.Hobbies.AddAsync(hobby);
-            await dbContext.SaveChangesAsync();
+            //await dbContext.SaveChangesAsync();
             var hub = new Hub()
             {
                 HobbyId = a.Entity.Id,
@@ -49,6 +50,7 @@ namespace HobbyHub.Web.Services.Services
             await dbContext.SaveChangesAsync();
 
             hobby.HubId = hub.Id;
+            hub.HobbyId = hobby.Id;
             await dbContext.SaveChangesAsync();
 
         }
@@ -79,9 +81,10 @@ namespace HobbyHub.Web.Services.Services
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task EditHobbyAsync(int categoryId, EditHobbyViewModel model)
+        public async Task EditHobbyAsync(int categoryId, EditHobbyViewModel model, IFormFile imageFile)
         {
             var hobby = await dbContext.Hobbies.FindAsync(categoryId);
+
             if (hobby == null) 
             {
                 throw new ArgumentException("Hobby not found");
@@ -89,7 +92,13 @@ namespace HobbyHub.Web.Services.Services
            
             hobby.Name = model.Name;
             hobby.Description = model.Description;
-           
+
+            if (model.CurrentImageUrl != null)
+            {
+                var imageUrl = await imageService.SaveImage(imageFile);
+                hobby.ImageUrl = imageUrl;
+            }
+
             dbContext.Hobbies.Update(hobby);
             await dbContext.SaveChangesAsync();
         }

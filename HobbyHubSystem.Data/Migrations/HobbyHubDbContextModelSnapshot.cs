@@ -116,7 +116,7 @@ namespace HobbyHubSystem.Data.Migrations
                         {
                             Id = new Guid("c5e2081c-5052-4162-b0d7-1920163d6b9d"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6ccb59ba-f8e2-4dad-8fce-0e33cb69c040",
+                            ConcurrencyStamp = "871c35f1-856a-480e-9f48-fad5e6839c2d",
                             Email = "mihaela@abv.bg",
                             EmailConfirmed = true,
                             FirstName = "Mihaela",
@@ -126,9 +126,9 @@ namespace HobbyHubSystem.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MIHAELA@ABV.BG",
                             NormalizedUserName = "MIHAELA MIHAEL4OV",
-                            PasswordHash = "AQAAAAEAACcQAAAAEO8797T74QxEt8GhEXbsL/F+E15pjEbHl+uqbhvYqtqrsZAIMc4E2KctUhoqqkQPXw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBCpr++Rrwxg7Eu97ij+pi9s+58+v3yRfvtSxvywL+UR/BLRO+qOT/y+HmBl6B29Ng==",
                             PhoneNumberConfirmed = false,
-                            RegisteredOn = new DateTime(2023, 8, 14, 11, 47, 50, 687, DateTimeKind.Utc).AddTicks(5694),
+                            RegisteredOn = new DateTime(2023, 8, 14, 12, 29, 50, 245, DateTimeKind.Utc).AddTicks(8120),
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
                             UserName = "Mihaela Mihael4ov"
@@ -137,7 +137,7 @@ namespace HobbyHubSystem.Data.Migrations
                         {
                             Id = new Guid("2a29f172-6978-420f-a929-ca5678254935"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a3044f67-c762-4c40-9a89-d9c0dbd0ba21",
+                            ConcurrencyStamp = "11af791e-0233-4e00-8398-181007143a42",
                             Email = "sami@abv.bg",
                             EmailConfirmed = true,
                             FirstName = "Sami",
@@ -147,9 +147,9 @@ namespace HobbyHubSystem.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SAMI@ABV.BG",
                             NormalizedUserName = "SAMI SAM4OV",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAAXPpjMLbkI0W7o1IMG8kQLOQDlxlEt9ESIf+QuJ5IIiZRp+/vKoBQynL0y+AC5/g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFPfCPfynrcKhEwH+WsUja862MaIKsos9vDyzpKA+Ed9jwUaqjQRTr8gVg5JdGAd2w==",
                             PhoneNumberConfirmed = false,
-                            RegisteredOn = new DateTime(2023, 8, 14, 11, 47, 50, 689, DateTimeKind.Utc).AddTicks(9213),
+                            RegisteredOn = new DateTime(2023, 8, 14, 12, 29, 50, 248, DateTimeKind.Utc).AddTicks(1824),
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
                             UserName = "Sami Sam4ov"
@@ -455,7 +455,7 @@ namespace HobbyHubSystem.Data.Migrations
                             CreatorId = new Guid("c5e2081c-5052-4162-b0d7-1920163d6b9d"),
                             Description = "Water skiing (also waterskiing or water-skiing) is a surface water sport in which an individual is pulled behind a boat or a cable ski installation over a body of water, skimming the surface on two skis or one ski.",
                             HubId = 1,
-                            ImageUrl = "https://en.wikipedia.org/wiki/Water_skiing#/media/File:Water_skiing_on_the_yarra02.jpg",
+                            ImageUrl = "https://worldwaterskiers.com/wp-content/uploads/2019/06/im-waterskiing.jpg",
                             IsActive = true,
                             IsApproved = true,
                             Name = "Water skiing"

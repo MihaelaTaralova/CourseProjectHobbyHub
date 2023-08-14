@@ -1,5 +1,6 @@
 ﻿using HobbyHub.Data;
 using HobbyHub.Web.Services.Interfaces;
+using HobbyHub.Web.Services.Services;
 using HobbyHubSystem.Web.ViewModels.Hobby;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,15 +15,17 @@ namespace HobbyHub.Controllers
         private readonly HobbyHubDbContext dbContext;
         private readonly IHobbyService hobbyService;
         private readonly IHubService hubService;
+        private readonly IImageService imageService;
 
         public HobbyController(HobbyHubDbContext _dbContext,
             IHobbyService _hobbyService,
-            IHubService _hubService)
+            IHubService _hubService,
+            IImageService imageService)
         {
             this.dbContext = _dbContext;
             this.hobbyService = _hobbyService;
             this.hubService = _hubService;
-
+            this.imageService = imageService;
         }
 
         [HttpGet]
@@ -94,13 +97,13 @@ namespace HobbyHub.Controllers
             {
                 return NotFound();
             }
-
+           
             var hobbyViewModel = new EditHobbyViewModel
             {
                 Id = Id,
                 Name = hobby.Name,
                 Description = hobby.Description,
-                ImageUrl = hobby.ImageUrl
+                CurrentImageUrl = hobby.ImageUrl
             };
 
             return View(hobbyViewModel);
@@ -108,7 +111,7 @@ namespace HobbyHub.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditHobby(int Id, EditHobbyViewModel model)
+        public async Task<IActionResult> EditHobby(int Id, EditHobbyViewModel model, IFormFile imageFile)
         {
             if (Id <= 0)
             {
@@ -119,7 +122,13 @@ namespace HobbyHub.Controllers
             {
                 try
                 {
-                    await hobbyService.EditHobbyAsync(Id, model);
+                    if (model.ImageFile != null)
+                    {
+                        var newImageUrl = await imageService.SaveImage(imageFile);
+                        model.CurrentImageUrl = newImageUrl;
+                    }
+
+                    await hobbyService.EditHobbyAsync(Id, model, model.ImageFile);
                     return RedirectToAction("OpenHobby", "Hobby", new { id = model.Id, name = model.Name }, fragment: null);
                 }
                 catch (ArgumentException ex)
