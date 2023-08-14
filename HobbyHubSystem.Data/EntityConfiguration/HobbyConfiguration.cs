@@ -3,13 +3,16 @@ using HobbyBubSystem.Data.Models.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace HobbyHubSystem.Data.EntityConfiguration
 {
-    internal class HobbyConfiguration : IEntityTypeConfiguration<Hobby>
+    public class HobbyConfiguration : IEntityTypeConfiguration<Hobby>
     {
-        private readonly UserManager<HobbyUser> _userManager;
-
+        public HobbyConfiguration()
+        {
+            
+        }
         public void Configure(EntityTypeBuilder<Hobby> builder)
         {
             builder
@@ -26,9 +29,7 @@ namespace HobbyHubSystem.Data.EntityConfiguration
                 .HasOne(h => h.Hub)
                 .WithOne(h => h.Hobby)
                 .OnDelete(DeleteBehavior.Restrict);
-
         }
-
 
     }
 }

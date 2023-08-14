@@ -1,13 +1,20 @@
 ﻿using HobbyBubSystem.Data.Models;
+using HobbyHub.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HobbyHubSystem.Data.EntityConfiguration
 {
-    internal class CategoryConfiguration : IEntityTypeConfiguration<Category>
+    public class CategoryConfiguration : IEntityTypeConfiguration<Category>
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
+            builder
+              .HasMany(h => h.Hobbies)
+              .WithOne(h => h.Category)
+              .HasForeignKey(h => h.CategoryId)
+              .OnDelete(DeleteBehavior.Restrict);
+
             builder.HasData(this.GenerateCategories());
         }
 
@@ -20,8 +27,8 @@ namespace HobbyHubSystem.Data.EntityConfiguration
             category = new Category()
             {
                 Id = 1,
-                Name = "Sports",
-                ImageUrl = "https://penaltyfile.com/wp-content/uploads/2020/06/different-types-of-sports-June32020-1-min.jpg",
+                Name = "Water",
+                ImageUrl = "https://dawnmagazines.com/wp-content/uploads/2020/10/Water-Sports.jpg",
               
             };
             categories.Add(category);
@@ -34,6 +41,7 @@ namespace HobbyHubSystem.Data.EntityConfiguration
             };
 
             categories.Add(category);
+
             return categories.ToArray();
         }
     }

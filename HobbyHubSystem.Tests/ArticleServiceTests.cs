@@ -5,6 +5,7 @@ using HobbyHub.Web.Services.Interfaces;
 using HobbyHub.Web.Services.Services;
 using HobbyHubSystem.Web.ViewModels.Article;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 using static HobbyHubSystem.Tests.DatabaseSeeder;

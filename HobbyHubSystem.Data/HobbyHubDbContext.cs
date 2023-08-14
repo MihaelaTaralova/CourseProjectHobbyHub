@@ -5,15 +5,17 @@ using HobbyHubSystem.Data.EntityConfiguration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace HobbyHub.Data
 {
     public class HobbyHubDbContext : IdentityDbContext<HobbyUser, IdentityRole<Guid>, Guid>
     {
+       
         public HobbyHubDbContext(DbContextOptions<HobbyHubDbContext> options)
             : base(options)
         {
+           
         }
 
         public DbSet<Article> Articles { get; set; } = null!;
@@ -38,11 +40,11 @@ namespace HobbyHub.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(builder);
 
             builder.ApplyConfiguration<HobbyUser>(new HobbyUserConfiguration());
-            //builder.ApplyConfiguration<Category>(new CategoryConfiguration());
+            builder.ApplyConfiguration<Category>(new CategoryConfiguration());
             builder.ApplyConfiguration<Hobby>(new HobbyConfiguration());
+            builder.ApplyConfiguration<Hobby>(new SeedHobbyConfiguration());
             builder.ApplyConfiguration<Hub>(new HubConfiguration());
             builder.ApplyConfiguration<HobbyUserHub>(new HobbyUserHubConfiguration());
             builder.ApplyConfiguration<HobbyUserEvent>(new HobbyUserEventConfiguration());
@@ -50,6 +52,8 @@ namespace HobbyHub.Data
             builder.ApplyConfiguration<Event>(new EventConfiguration());
             builder.ApplyConfiguration<Question>(new QuestionConfiguration());
             builder.ApplyConfiguration<Answer>(new AnswerConfiguration());
+            
+            base.OnModelCreating(builder);
         }
         
     }

@@ -110,6 +110,50 @@ namespace HobbyHubSystem.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("c5e2081c-5052-4162-b0d7-1920163d6b9d"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "6ccb59ba-f8e2-4dad-8fce-0e33cb69c040",
+                            Email = "mihaela@abv.bg",
+                            EmailConfirmed = true,
+                            FirstName = "Mihaela",
+                            Gender = "female",
+                            ImageUrl = "https://www.taylorherring.com/wp-content/uploads/2015/03/Archetypal-Female-Face-of-Beauty-embargoed-to-00.01hrs-30.03.15.jpg",
+                            LastName = "Mihael4ov",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MIHAELA@ABV.BG",
+                            NormalizedUserName = "MIHAELA MIHAEL4OV",
+                            PasswordHash = "AQAAAAEAACcQAAAAEO8797T74QxEt8GhEXbsL/F+E15pjEbHl+uqbhvYqtqrsZAIMc4E2KctUhoqqkQPXw==",
+                            PhoneNumberConfirmed = false,
+                            RegisteredOn = new DateTime(2023, 8, 14, 11, 47, 50, 687, DateTimeKind.Utc).AddTicks(5694),
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "Mihaela Mihael4ov"
+                        },
+                        new
+                        {
+                            Id = new Guid("2a29f172-6978-420f-a929-ca5678254935"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "a3044f67-c762-4c40-9a89-d9c0dbd0ba21",
+                            Email = "sami@abv.bg",
+                            EmailConfirmed = true,
+                            FirstName = "Sami",
+                            Gender = "male",
+                            ImageUrl = "https://www.taylorherring.com/wp-content/uploads/2015/03/Archetypal-Male-Face-of-Beauty-embargoed-to-00.01hrs-30.03.15.jpg",
+                            LastName = "Sam4ov",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "SAMI@ABV.BG",
+                            NormalizedUserName = "SAMI SAM4OV",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAAXPpjMLbkI0W7o1IMG8kQLOQDlxlEt9ESIf+QuJ5IIiZRp+/vKoBQynL0y+AC5/g==",
+                            PhoneNumberConfirmed = false,
+                            RegisteredOn = new DateTime(2023, 8, 14, 11, 47, 50, 689, DateTimeKind.Utc).AddTicks(9213),
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "Sami Sam4ov"
+                        });
                 });
 
             modelBuilder.Entity("HobbyBubSystem.Data.Models.Answer", b =>
@@ -238,6 +282,22 @@ namespace HobbyHubSystem.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ImageUrl = "https://dawnmagazines.com/wp-content/uploads/2020/10/Water-Sports.jpg",
+                            IsActive = true,
+                            Name = "Water"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/e/e1/Pilates_Moscow.jpg",
+                            IsActive = true,
+                            Name = "Spiritual and Mental"
+                        });
                 });
 
             modelBuilder.Entity("HobbyBubSystem.Data.Models.Discussion.DiscussionTopic", b =>
@@ -382,7 +442,36 @@ namespace HobbyHubSystem.Data.Migrations
 
                     b.HasIndex("CreatorId");
 
+                    b.HasIndex("HubId")
+                        .IsUnique();
+
                     b.ToTable("Hobbies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            CreatorId = new Guid("c5e2081c-5052-4162-b0d7-1920163d6b9d"),
+                            Description = "Water skiing (also waterskiing or water-skiing) is a surface water sport in which an individual is pulled behind a boat or a cable ski installation over a body of water, skimming the surface on two skis or one ski.",
+                            HubId = 1,
+                            ImageUrl = "https://en.wikipedia.org/wiki/Water_skiing#/media/File:Water_skiing_on_the_yarra02.jpg",
+                            IsActive = true,
+                            IsApproved = true,
+                            Name = "Water skiing"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 2,
+                            CreatorId = new Guid("2a29f172-6978-420f-a929-ca5678254935"),
+                            Description = "Reiki is a form of energy healing. Its roots can be traced back to the 1920’s in Japan. Pronounced “ray-kee”, Reiki can be roughly translated to mean “Universal Life Force” where Rei means Universal and Ki is Life force. ",
+                            HubId = 2,
+                            ImageUrl = "https://www.tododisca.com/wp-content/uploads/2020/08/sesion-de-reiki-2-1.jpg",
+                            IsActive = true,
+                            IsApproved = true,
+                            Name = "Reiki"
+                        });
                 });
 
             modelBuilder.Entity("HobbyBubSystem.Data.Models.HobbyUserEvent", b =>
@@ -448,10 +537,25 @@ namespace HobbyHubSystem.Data.Migrations
 
                     b.HasIndex("CreatorId");
 
-                    b.HasIndex("HobbyId")
-                        .IsUnique();
-
                     b.ToTable("Hubs");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            About = "This hub belongs to hobby Water skiing and all articles, events and discussions are connected with Water skiing",
+                            CreatorId = new Guid("c5e2081c-5052-4162-b0d7-1920163d6b9d"),
+                            HobbyId = 1,
+                            Name = "Water skiing"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            About = "This hub belongs to hobby Reiki and all articles, events and discussions are connected with Reiki",
+                            CreatorId = new Guid("2a29f172-6978-420f-a929-ca5678254935"),
+                            HobbyId = 2,
+                            Name = "Reiki"
+                        });
                 });
 
             modelBuilder.Entity("HobbyBubSystem.Data.Models.Question", b =>
@@ -725,9 +829,17 @@ namespace HobbyHubSystem.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("HobbyBubSystem.Data.Models.Hub", "Hub")
+                        .WithOne("Hobby")
+                        .HasForeignKey("HobbyBubSystem.Data.Models.Hobby", "HubId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.Navigation("Category");
 
                     b.Navigation("Creator");
+
+                    b.Navigation("Hub");
                 });
 
             modelBuilder.Entity("HobbyBubSystem.Data.Models.HobbyUserEvent", b =>
@@ -776,15 +888,7 @@ namespace HobbyHubSystem.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HobbyBubSystem.Data.Models.Hobby", "Hobby")
-                        .WithOne("Hub")
-                        .HasForeignKey("HobbyBubSystem.Data.Models.Hub", "HobbyId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("Creator");
-
-                    b.Navigation("Hobby");
                 });
 
             modelBuilder.Entity("HobbyBubSystem.Data.Models.Question", b =>
@@ -887,12 +991,6 @@ namespace HobbyHubSystem.Data.Migrations
                     b.Navigation("HobbyUsers");
                 });
 
-            modelBuilder.Entity("HobbyBubSystem.Data.Models.Hobby", b =>
-                {
-                    b.Navigation("Hub")
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("HobbyBubSystem.Data.Models.Hub", b =>
                 {
                     b.Navigation("Articles");
@@ -900,6 +998,9 @@ namespace HobbyHubSystem.Data.Migrations
                     b.Navigation("DiscussionTopics");
 
                     b.Navigation("Events");
+
+                    b.Navigation("Hobby")
+                        .IsRequired();
 
                     b.Navigation("Members");
                 });
