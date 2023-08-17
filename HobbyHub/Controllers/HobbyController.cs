@@ -111,20 +111,24 @@ namespace HobbyHub.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditHobby(int Id, EditHobbyViewModel model, IFormFile imageFile)
+        public async Task<IActionResult> EditHobby(int Id, EditHobbyViewModel model)
         {
             if (Id <= 0)
             {
                 return BadRequest();
             }
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) 
             {
                 try
                 {
-                    if (model.ImageFile != null)
+                    if(model.ImageFile  == null && model.CurrentImageUrl != null)
                     {
-                        var newImageUrl = await imageService.SaveImage(imageFile);
+                        model.CurrentImageUrl = await hobbyService.GetHobbyImageUrlById(Id);
+                    }
+                    if (model.ImageFile != null && model.CurrentImageUrl != null)
+                    {
+                        var newImageUrl = await imageService.SaveImage(model.ImageFile);
                         model.CurrentImageUrl = newImageUrl;
                     }
 

@@ -15,13 +15,15 @@ namespace HobbyHub.Web.Services.Interfaces
 
         Task AddHobbyAsync(AddHobbyViewModel hobbyViewModel, Guid userId, bool isApproved = false);
 
-        Task EditHobbyAsync(int categoryId, EditHobbyViewModel model, IFormFile formFile);
+        Task EditHobbyAsync(int categoryId, EditHobbyViewModel model, IFormFile imageFile);
 
         Task DeleteHobbyAsync(int categoryId);
 
         Task<PendingHobbiesViewModel> GetPendingHobbiesAsync();
 
         Task ApproveHobbyAsync(int hobbyId);
+
+        Task<string> GetHobbyImageUrlById(int hobbyId);
 
     }
 }

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Edit Hobby";
 }
 
-<h2>Edit Category</h2>
+<h2>Edit Hobby</h2>
 
 @using (Html.BeginForm("EditHobby", "Hobby", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -22,15 +22,18 @@
         @Html.ValidationMessageFor(model => model.Description)
     </div>
     <div class="form-group">
-        @Html.LabelFor(model => model.CurrentImageUrl)
+        <label asp-for="CurrentImageUrl" class="control-label">Image Link</label>
         @Html.TextBoxFor(model => model.CurrentImageUrl, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.CurrentImageUrl)
     </div>
-
     <div class="form-group">
+        <button type="button" id="changePictureButton">Change Picture</button>
+    </div>
+    <div class="form-group" id="newImageField" style="display: none;">
         <label asp-for="ImageFile">New Image</label>
         <input type="file" asp-for="ImageFile" class="form-control" accept="image/*">
     </div>
+
 
     @Html.HiddenFor(model => model.Id)
 
@@ -38,4 +41,12 @@
 }
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#changePictureButton").click(function () {
+                $("#newImageField").toggle();
+            });
+        });
+    </script>
 }

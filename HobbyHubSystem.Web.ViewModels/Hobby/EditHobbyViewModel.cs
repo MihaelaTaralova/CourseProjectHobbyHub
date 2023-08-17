@@ -16,7 +16,7 @@ namespace HobbyHubSystem.Web.ViewModels.Hobby
                 
         public IFormFile? ImageFile { get; set; }
                
-        public string CurrentImageUrl { get; set; } = null!;
+        public string CurrentImageUrl { get; set; }
 
     }
 }

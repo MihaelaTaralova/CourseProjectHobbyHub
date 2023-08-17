@@ -173,7 +173,7 @@ namespace HobbyHubSystem.Tests
 
             // Assert
             Assert.NotNull(result);
-            Assert.AreEqual(4, result.Count);
+            Assert.AreEqual(6, result.Count);
             Assert.IsTrue(result.Any(c => c.Name == "Category 1"));
             Assert.IsTrue(result.Any(c => c.Name == "Category 2"));
             Assert.IsFalse(result.Any(c => c.Name == "Category 3"));

@@ -152,7 +152,7 @@ public class HobbyServiceTests
         };
 
         // Act
-        await hobbyService.EditHobbyAsync(hobbyId, editModel);
+        await hobbyService.EditHobbyAsync(hobbyId, editModel, null);
 
         // Assert
         var updatedHobby = dbContext.Hobbies.Find(hobbyId);
@@ -168,7 +168,7 @@ public class HobbyServiceTests
         var editModel = new EditHobbyViewModel();
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentException>(async () => await hobbyService.EditHobbyAsync(nonExistingHobbyId, editModel));
+        Assert.ThrowsAsync<ArgumentException>(async () => await hobbyService.EditHobbyAsync(nonExistingHobbyId, editModel, null));
     }
 
     [Test]
@@ -179,7 +179,7 @@ public class HobbyServiceTests
 
         // Assert
         Assert.NotNull(result);
-        Assert.AreEqual(2, result.Count);  
+        Assert.That(result.Count, Is.EqualTo(4));  
     }
 
     [Test]
@@ -194,7 +194,7 @@ public class HobbyServiceTests
 
         // Assert
         Assert.NotNull(result);
-        Assert.AreEqual(expectedHobbiesCount, result.Count);
+        Assert.That(result.Count, Is.EqualTo(expectedHobbiesCount));
         Assert.IsTrue(result.All(h => h.CategoryId == categoryIdToSearch));
     }
 

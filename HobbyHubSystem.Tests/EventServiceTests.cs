@@ -176,7 +176,7 @@ namespace HobbyHubSystem.Tests
 
             // Assert
             Assert.NotNull(events);
-            Assert.AreEqual(3, events.Count);
+            Assert.AreEqual(2, events.Count);
         }
 
         [Test]

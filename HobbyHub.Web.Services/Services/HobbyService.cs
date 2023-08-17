@@ -93,7 +93,12 @@ namespace HobbyHub.Web.Services.Services
             hobby.Name = model.Name;
             hobby.Description = model.Description;
 
-            if (model.CurrentImageUrl != null)
+            if (model.CurrentImageUrl != null && model.ImageFile == null)
+            {
+                // var imageUrl = await imageService.SaveImage(imageFile);
+                hobby.ImageUrl = model.CurrentImageUrl;
+            }
+            if (model.ImageFile != null && model.CurrentImageUrl != null)
             {
                 var imageUrl = await imageService.SaveImage(imageFile);
                 hobby.ImageUrl = imageUrl;
@@ -101,6 +106,18 @@ namespace HobbyHub.Web.Services.Services
 
             dbContext.Hobbies.Update(hobby);
             await dbContext.SaveChangesAsync();
+        }
+
+        public async Task<string> GetHobbyImageUrlById(int hobbyId)
+        {
+            var hobby = await dbContext.Hobbies.FindAsync(hobbyId);
+
+            if (hobby != null)
+            {
+                return hobby.ImageUrl;
+            }
+
+            return string.Empty;
         }
 
         public async Task<List<Hobby>> GetAllHobbiesAsync()
