@@ -141,7 +141,7 @@ namespace HobbyHub.Controllers
             try
             {
                 await eventService.DeleteEvent(id);
-                return RedirectToAction("All", "Event");
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception)
             {

@@ -78,7 +78,8 @@ namespace HobbyHub.Controllers
             if (ModelState.IsValid)
             {
                 await articleService.AddArticleAsync(articleViewModel, new Guid(User.FindFirst(ClaimTypes.NameIdentifier).Value), isAppoved);
-                return RedirectToAction("All");
+              
+                return RedirectToAction("All", "Article", new { hubId = articleViewModel.HubId });
             }
 
             return View(articleViewModel);
@@ -139,7 +140,7 @@ namespace HobbyHub.Controllers
             try
             {
                 await articleService.DeleteArticle(id);
-                return RedirectToAction("All", "Article");
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception)
             {

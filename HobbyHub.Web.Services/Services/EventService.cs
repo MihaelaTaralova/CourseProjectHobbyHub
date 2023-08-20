@@ -144,7 +144,8 @@ namespace HobbyHub.Web.Services.Services
                 Title = eventModel.Title,
                 Description = eventModel.Description,
                 DateOfEvent = eventModel.DateOfEvent,
-                Location = eventModel.Location
+                Location = eventModel.Location,
+                HubId = eventModel.HubId,
             };
         }
 
